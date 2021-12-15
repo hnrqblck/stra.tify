@@ -13,10 +13,10 @@ const Header = () => {
         <header className="header">
             <nav className='container'>
                 <Link className='logo' to="/">Stra.tify</Link>
-                <Link to="/">Início</Link>
+                <Link className='active' to="/">Início</Link>
                 <Link to="/login">Sobre</Link>
                 <Link to="/podcaster">Para Podcaster</Link>
-                <RoundButton onClick={handleClick} text='Entrar >' outlined='outlined'/>
+                <RoundButton onClick={handleClick} text='Entrar >' class='outlined'/>
             </nav>
         </header>
     );
