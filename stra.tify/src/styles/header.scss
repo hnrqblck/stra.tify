@@ -1,6 +1,6 @@
 .header {
     padding: 0.5rem 0;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 100;
     background-color: #ffff;
@@ -8,7 +8,7 @@
 
     nav {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         font-size: 20px;
         padding: 64px 0;
@@ -24,9 +24,14 @@
             margin-right: 40rem;
         }
 
-        .active {
+        .focus {
             color: #EC2390;
         }
+
+        .hidden {
+            visibility: hidden;
+        }
+
     }
 
 }

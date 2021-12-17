@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/header.scss';
-import RoundButton from './RoundButton';
+import { Button } from '@chakra-ui/react'
+import { ChevronRightIcon } from '@chakra-ui/icons'
 
-const Header = () => {
+const Header = (props) => {
 
     function handleClick(event) {
         event.preventDefault();
@@ -13,10 +14,21 @@ const Header = () => {
         <header className="header">
             <nav className='container'>
                 <Link className='logo' to="/">Stra.tify</Link>
-                <Link className='active' to="/">Início</Link>
-                <Link to="/login">Sobre</Link>
-                <Link to="/podcaster">Para Podcaster</Link>
-                <RoundButton onClick={handleClick} text='Entrar >' class='outlined'/>
+                <Link className={props.inicio} to="/">Início</Link>
+                <Link className={props.sobre} to="/login">Sobre</Link>
+                <Link className={props.podcaster} to="/podcaster">Para Podcaster</Link>
+                <Link className={props.login} to="/login">    
+                    <Button 
+                        rightIcon={<ChevronRightIcon color='#EC2390'/>}
+                        variant='outline'
+                        borderRadius='100px'
+                        borderColor='#EC2390'
+                        color='#EC2390'
+                        _hover={{ borderColor: 'black', transition: '200ms ease' }}
+                        >
+                        Entrar
+                    </Button>
+                </Link>
             </nav>
         </header>
     );
