@@ -1,0 +1,27 @@
+
+.container-login {
+    max-width: 350px;
+	margin: 40px auto 0 auto;
+	display: flex;
+}
+
+.center-alignment{
+    flex-direction: column;
+    align-content: flex-start;
+
+    .item-login {
+        margin-bottom: 34px;
+        flex-grow: 1;
+    }
+
+    h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    button {
+        width: 350px;
+        height: 50px;
+    }
+}
+

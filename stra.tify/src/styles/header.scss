@@ -1,3 +1,5 @@
+$pink-1: #EC2390;
+
 .header {
     padding: 0.5rem 0;
     position: absolute;
@@ -15,7 +17,7 @@
         height: 8rem;
 
         a:hover {
-            color: #EC2390;
+            color: $pink-1;
             transition: 200ms ease;
         }
 
@@ -25,7 +27,7 @@
         }
 
         .focus {
-            color: #EC2390;
+            color: $pink-1;
         }
 
         .hidden {
