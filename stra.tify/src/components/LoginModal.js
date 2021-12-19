@@ -16,9 +16,12 @@ import {
     InputGroup,
     InputRightElement
   } from '@chakra-ui/react'
-import { ReactComponent as StraLogo2 } from '../assets/images/s-1.svg';
+import { AuthContext } from './providers/auth';
+import { authenticate } from '../services/requestFunctions';
+// import { useForm } from "react-hook-form";
+import { Link, useHistory } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { Link } from 'react-router-dom';
+import { ReactComponent as StraLogo2 } from '../assets/images/s-1.svg';
 
 const LoginModal = () => {
     const [show, setShow] = React.useState(false);
