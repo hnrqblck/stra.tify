@@ -1,27 +1,91 @@
 
+#page-login {
+    display: flex;
+    height: 50vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .container-login {
     max-width: 350px;
-	margin: 40px auto 0 auto;
-	display: flex;
+	margin: 80px auto 0 auto;
+    
+
+}
+
+.modal-login {
+    display: flex !important;
+    background-color: #B7ECBC !important;
+    
+    .modal-header {
+        text-align: center;
+        width: auto;
+        flex-direction: column;
+        align-content: flex-start;
+        
+        span {
+            font-size: 40px;
+            align-self: center;
+        }
+
+       
+    }
+
+    label {
+        margin-top: 24px;
+    }
+    input {
+        background: #ffff;
+        // margin-bottom: 16px;
+    }
+
+    .forget-password {
+        padding-top: 16px;
+        font-weight: bold;
+    }
+
+    .btn-login {
+        margin-top: 23px;
+        text-align: center;
+        width: 350px;
+        height: 50px;
+    }
+
 }
 
 .center-alignment{
     flex-direction: column;
     align-content: flex-start;
 
+    
     .item-login {
         margin-bottom: 34px;
         flex-grow: 1;
     }
-
+    
     h1 {
         font-size: 30px;
         font-weight: 600;
     }
-
+    
     button {
         width: 350px;
         height: 50px;
-    }
+    }        
+ }
+    
+
+
+.hex-div{
+    position: fixed;
+    bottom: 0;
+    left: 86%;
+    width: 100%;
 }
+
+.chakra-checkbox__control[data-checked] {
+    border-color: #2ED649 !important;
+    background: #2ED649 !important;
+}
+
 
