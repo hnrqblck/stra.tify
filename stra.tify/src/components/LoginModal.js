@@ -1,31 +1,57 @@
 import React from 'react';
 import {
+    Box,
     Button,
-    Modal,
     ModalOverlay,
     ModalContent,
     ModalHeader,
-    ModalFooter,
     ModalBody,
     ModalCloseButton,
     FormControl,
     FormLabel,
     FormErrorMessage,
-    FormHelperText,
     Input,
     InputGroup,
     InputRightElement
   } from '@chakra-ui/react'
 import { AuthContext } from './providers/auth';
 import { authenticate } from '../services/requestFunctions';
-// import { useForm } from "react-hook-form";
-import { Link, useHistory } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { ReactComponent as StraLogo2 } from '../assets/images/s-1.svg';
 
 const LoginModal = () => {
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
+
+    const [loginErrors, setLoginErrors] = React.useState("");
+    const auth = React.useContext(AuthContext);
+    const navigate = useNavigate();
+    const {
+        handleSubmit,
+        register,
+        formState: { errors, isSubmitting },
+    } = useForm();
+
+    const handleLogin = (values) => {
+        authenticate(values)
+        .then((response) => {
+            if (response.data) {
+            auth.setApiToken(response.data.access_token);
+            auth.setSession(response.data.access_token);
+            navigate.push("/login");
+            console.log(response.data)
+            }
+        })
+        .catch((err) => {
+            if (err.message === "Request failed with status code 403") {
+            setLoginErrors("Acesso negado: email ou senha inválidos!");
+            } else {
+            setLoginErrors(err.message);
+            }
+        });
+    };
 
     return (
         <>
@@ -37,39 +63,59 @@ const LoginModal = () => {
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <FormControl id='login'>
-                        <FormLabel>E-mail</FormLabel>
-                        <Input 
-                            type='email'
-                            placeholder='example@strateegia.com'
-                        />
-                        <FormLabel>Senha</FormLabel>
-                        <InputGroup size='md'>
-                            <Input
-                                pr='4.5rem'
-                                type={show ? 'text' : 'password'}
-                                placeholder='*********'
+                    {auth.isAuthenticated && <Navigate to="/" />}
+                    {!auth.isAuthenticated && (
+                        <FormControl id='login' onSubmit={handleSubmit(handleLogin)}>
+                            <FormLabel>E-mail</FormLabel>
+                            <Input 
+                                id='email'
+                                type='email'
+                                placeholder='example@strateegia.com'
+                                {...register("email", {
+                                    required: "campo obrigatório *",
+                                })}
                             />
-                            <InputRightElement width='4.5rem'>
-                                <Button h='1.75rem' size='sm' onClick={handleClick}>
-                                {(show)
-                                    ? <ViewIcon/>
-                                    : <ViewOffIcon/>
-                                }
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                        <br/>
-                        <Link className='forget-password' to="/">Esqueci minha senha</Link>
-                        <br/>
-                        <Button
-                            className='btn-login'
-                            bg='#EC2390'
-                            color='#ffff'
-                        >
-                            Entrar
-                        </Button>
-                    </FormControl>
+                            <FormLabel>Senha</FormLabel>
+                            <FormErrorMessage color="#dc0362">
+                                {errors.email && errors.email.message}
+                            </FormErrorMessage>
+                            <InputGroup size='md'>
+                                <Input
+                                    pr='4.5rem'
+                                    id='password'
+                                    type={show ? 'text' : 'password'}
+                                    placeholder='*********'
+                                    {...register("password", {
+                                        required: "campo obrigatório *",
+                                    })}
+                                />
+                                <InputRightElement width='4.5rem'>
+                                    <Button h='1.75rem' size='sm' onClick={handleClick}>
+                                    {(show)
+                                        ? <ViewIcon/>
+                                        : <ViewOffIcon/>
+                                    }
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                            <FormErrorMessage color="#dc0362">
+                                {errors.password && errors.password.message}
+                            </FormErrorMessage>
+                            <br/>
+                            <Link className='forget-password' to="/">Esqueci minha senha</Link>
+                            <br/>
+                            <Button
+                                isLoading={isSubmitting}
+                                className='btn-login'
+                                bg='#EC2390'
+                                color='#ffff'
+                                type='submit'
+                            >
+                                Entrar
+                            </Button>
+                            {loginErrors && <Box color="#dc0362">{loginErrors}</Box>}
+                        </FormControl>
+                    )}
                 </ModalBody>
 
             

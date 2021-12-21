@@ -1,0 +1,55 @@
+// SIDEBAR
+body {
+    padding-top: 0;
+    
+    #side-navbar {
+        display: flex;
+        align-items: flex-start;
+
+        div:first-child {
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+            border-radius: 0px 60px 60px 0px;
+
+            svg.hex {
+                align-self: center;
+                margin: 64px;
+            }
+            
+            nav {
+                display: flex;
+                flex-direction: column;
+                margin-left: 64px;
+
+                div {
+                    padding-bottom: 40px;
+                }
+
+                .podcasts {
+                    // width: 70px;
+                    // display: inline-block ;
+                    // white-space:nowrap;
+                    margin-bottom: 256px;
+                    flex-grow: 2;
+                    display: flex;
+                    
+                    svg {
+                        margin: 0;
+                        display: inline-block ;
+                        white-space:nowrap
+                    }
+
+                    span {
+                        align-self: center;
+                    }
+                }
+
+                span{
+                    padding-left: 8px;
+
+                }
+            }
+        }
+        }
+}
