@@ -15,7 +15,8 @@ const Header = (props) => {
             <nav className='container'>
                 <Link className='logo' to="/">Stra.tify</Link>
                 <Link className={props.inicio} to="/">Início</Link>
-                <Link className={props.sobre} to="/login">Sobre</Link>
+                <Link className={props.sobre} to="/AboutUs">Sobre</Link>
+                {/* <Link to={props.sobre} activeIdName="page-aboutus">Sobre</Link> */}
                 <Link className={props.podcaster} to="/podcaster">Para Podcaster</Link>
                 <Link className={props.login} to="/login">    
                     <Button 
