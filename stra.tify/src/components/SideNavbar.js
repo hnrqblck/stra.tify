@@ -4,12 +4,12 @@ import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-co
 import { ReactComponent as HexIcon } from '../assets/images/hexIcon.svg'
 import { HomeIcon, AccountIcon, ExitIcon } from './CreateIcon';
 import { SettingsIcon } from '@chakra-ui/icons'
-import '../styles/podcast.scss';
+import '../styles/sidenavbar.scss';
 
 const SideNavbar = () => {
     return (
         <Flex id='side-navbar'>
-            <Center w='305px' h='900px' bg='#B7ECBC'>
+            <Center h='900px' bg='#B7ECBC'>
                 <HexagonoColorido className='hex'/>
                 
                 <nav className='container'>

@@ -1,55 +1,98 @@
-// SIDEBAR
-body {
-    padding-top: 0;
-    
-    #side-navbar {
-        display: flex;
-        align-items: flex-start;
+#podcast-home--page {
+    display: flex;
 
-        div:first-child {
-            align-items: flex-start;
+    .sidenav {
+        flex: 1;
+    }
+
+    .main {
+        .container {
+            background: #B7ECBC;
+            width: auto;
+            padding: 40px 40px;
+            margin: 0 0 24px 40px;
+            align-self: stretch;
+        }
+
+        .podcast {
+            display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            border-radius: 0px 60px 60px 0px;
-
-            svg.hex {
-                align-self: center;
-                margin: 64px;
+            flex: 1;
+            width: 70vw;
+            align-items: flex-end;
+    
+            p {
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 23px;
             }
             
-            nav {
+            .user-greeting {
+                padding: 70px 0 23px 0px;
+            }
+            
+            .container {
                 display: flex;
-                flex-direction: column;
-                margin-left: 64px;
-
-                div {
-                    padding-bottom: 40px;
+            }
+    
+            .main-img {
+                filter:  drop-shadow(0px 27.4338px 15.375px rgba(0, 0, 0, 0.130318)) drop-shadow(0px 17.581px 9.85311px rgba(0, 0, 0, 0.114179)) drop-shadow(0px 11.3946px 6.38599px rgba(0, 0, 0, 0.1)) drop-shadow(0px 7.17278px 4.01991px rgba(0, 0, 0, 0.0858211)) drop-shadow(0px 4.12121px 2.30969px rgba(0, 0, 0, 0.0696822)) drop-shadow(0px 1.81385px 1.01655px rgba(0, 0, 0, 0.0479335));
+                border-radius: 10px;
+    
+            }
+    
+            .podcast-details {
+                margin-left: 16px;
+    
+                h1 {
+                    font-size: 60px;
+                    font-weight: 500;
+                    line-height: 70px;   
+                    padding: 8px 0;
                 }
-
-                .podcasts {
-                    // width: 70px;
-                    // display: inline-block ;
-                    // white-space:nowrap;
-                    margin-bottom: 256px;
-                    flex-grow: 2;
-                    display: flex;
-                    
-                    svg {
-                        margin: 0;
-                        display: inline-block ;
-                        white-space:nowrap
-                    }
-
-                    span {
-                        align-self: center;
-                    }
+    
+                button {
+                    margin-top: 32px;
                 }
+    
+            }
+            
+        }
+    
+        .podcasts-recentes {
+            flex: 1;
 
-                span{
-                    padding-left: 8px;
-
+            .podcasts-recentes--title {
+                flex-grow: 2;
+                display: flex;
+                margin: 0  0 23px 40px;
+                
+                h2 {
+                    font-size: 20px;
+                    font-weight: 700;
+                    padding-left: 30px;
+                    align-self: center;
                 }
             }
+
+            button.css-dn5esd {
+                background: none;
+                align-self: center;
+
+                &:focus {
+                    color: white;
+                    border-color: none;
+                    border: none;
+                }
+            }
+
+            .lcUbOd {
+                background: #393939;
+                box-shadow: 0 0 1px 3px rgba(0, 0, 0, 0.7);
+
+            }
         }
-        }
+
+    }
+    
 }

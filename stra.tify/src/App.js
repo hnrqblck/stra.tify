@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import Podcast from './pages/Podcast';
+import PodcastHome from './pages/PodcastHome';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Home />} />
           <Route path="/login" element={ <Login />} />
-          <Route path="/podcast" element={ <Podcast />} />
+          <Route path="/podcast-home" element={ <PodcastHome />} />
         </Routes>
       </BrowserRouter>
     </div>
