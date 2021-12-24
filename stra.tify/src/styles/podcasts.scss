@@ -1,0 +1,33 @@
+#podcasts-page {
+    display: flex;
+
+    .sidenav {
+        flex: 1;
+    }
+
+    main {
+        margin: 80px 0 0 40px;
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 23.44px;
+            margin-bottom: 40px;
+        }
+        input.css-8tczqk {
+            border-radius: 20px !important;
+            background: #E8E8E8;
+            margin-bottom: 40px;
+            width: 240px;
+        }
+
+        .podcasts {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -20px;
+
+            img{
+                margin: 20px 20px;
+            }
+        }
+    }
+}

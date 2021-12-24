@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-colorido.svg';
 import PodcasterBanner from '../assets/images/podcaster-2.jpg';
 import '../styles/home.scss';
+import Banner from './Banner';
+import Podcaster from './Podcaster';
 import AboutUs from './AboutUs';
 
 const Home = () => {
@@ -36,7 +38,14 @@ const Home = () => {
                 </aside>
             </div>
 
-            <div id='page-aboutus'>
+            <div id='banner'>
+                <Banner />
+            </div>
+
+            <div id='podcaster'>
+                <Podcaster />
+            </div>
+            <div id='about-us'>
                 <AboutUs />
             </div>
 

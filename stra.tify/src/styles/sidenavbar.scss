@@ -30,9 +30,14 @@ body {
                     // width: 70px;
                     // display: inline-block ;
                     // white-space:nowrap;
+                    display: flex;
                     margin-bottom: 256px;
                     flex-grow: 2;
-                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                    align-content: center;
+                    
                     
                     svg {
                         margin: 0;
@@ -41,7 +46,8 @@ body {
                     }
 
                     span {
-                        align-self: center;
+                        // display: flex;
+                        align-self: flex-start;
                     }
                 }
 

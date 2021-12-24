@@ -63,14 +63,14 @@ const LoginModal = () => {
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    {auth.isAuthenticated && <Navigate to="/" />}
+                    {auth.isAuthenticated && <Navigate to="/podcast-home" />}
                     {!auth.isAuthenticated && (
                         <FormControl id='login' onSubmit={handleSubmit(handleLogin)}>
                             <FormLabel>E-mail</FormLabel>
                             <Input 
                                 id='email'
                                 type='email'
-                                placeholder='example@strateegia.com'
+                                placeholder='email'
                                 {...register("email", {
                                     required: "campo obrigatório *",
                                 })}
@@ -104,6 +104,9 @@ const LoginModal = () => {
                             <br/>
                             <Link className='forget-password' to="/">Esqueci minha senha</Link>
                             <br/>
+                            </FormControl>
+                        )}
+                        {loginErrors && <Box color="#dc0362">{loginErrors}</Box>}
                             <Button
                                 isLoading={isSubmitting}
                                 className='btn-login'
@@ -113,9 +116,6 @@ const LoginModal = () => {
                             >
                                 Entrar
                             </Button>
-                            {loginErrors && <Box color="#dc0362">{loginErrors}</Box>}
-                        </FormControl>
-                    )}
                 </ModalBody>
 
             

@@ -27,10 +27,25 @@
                 font-weight: 500;
                 line-height: 23px;
             }
-            
-            .user-greeting {
-                padding: 60px 0 23px 0px;
+
+            .page-top{
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                width: auto;
+                justify-content: flex-start;
+                
+                .spotify-button {
+                    margin: 0 17px 17px 0;
+                }
+                
+                .user-greeting {
+                    padding: 60px 0 23px 0px;
+                }
+
+                
             }
+            
             
             .container {
                 display: flex;

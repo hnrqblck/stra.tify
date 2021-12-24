@@ -1,32 +1,35 @@
 import React from 'react';
-import Lightbulb from '../assets/images/lightbulb.png';
-import SpeechBalloon from '../assets/images/balloons.png';
-import ThumbsUp from '../assets/images/thumbsUp.png';
+import { LinkedinIcon } from '../components/CreateIcon';
 import '../styles/about-us.scss';
 
 const AboutUs = () => {
     return (
-        <div id='about-us'>
-            <h1>Pensamos em um espaço perfeito para você.</h1>
-            <p className='description'>Stra.tify é uma plataforma que une os ouvintes e os Podcaster  num ambiente só.</p>
-            <section className='cards'>
-                <div>
-                    <img src={Lightbulb} alt='Lâmpada'/>
-                    <p>Dê a sua sugestão para os podcaster</p>
+        <div id='page--about-us'>
+            <section className='container'>
+                <div className='about-us'>
+                    <h1>Sobre nós</h1>
+                    <p>O stra.tify foi fundado no ano de 2021 em Recife. Desenvolvido por Henrique Balck juntamente com Letícia Siqueira.</p>
                 </div>
-                <div>
-                    <img src={SpeechBalloon} alt='Balões de conversação'/>
-                    <p>Comente com outros ouvintes</p>
+                <div className='contact'>
+                        <h1>Contato</h1>
+                    <div>
+                        <LinkedinIcon boxsixe={24}/>
+                        <a href='https://www.linkedin.com/in/henrique-black/' target='_blank'>/in/henrique-black/</a>
+                    </div>
+                    <div>
+                        <LinkedinIcon boxsixe={24}/>
+                        <a href='https://www.linkedin.com/in/let%C3%ADcia-siqueira-/' target='_blank'>/in/letícia-siqueira-/</a>
+                    </div>
                 </div>
-                <div>
-                    <img src={ThumbsUp} alt='Mão com o polegar para cima'/>
-                    <p>Indique algo extraordinário</p>
+                <div className='questions'>
+                    <h1>Alguma dúvida?</h1>
+                    <p>support@strateegia.digital</p>
                 </div>
 
             </section>
-
+            <p className='rights'>2021 Stra.tify - Todos os direitos reservados</p>
         </div>
-    )
-}
+    );
+};
 
 export default AboutUs;

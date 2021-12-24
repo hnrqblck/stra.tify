@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/header.scss';
 import { Button } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
+import '../styles/header.scss';
 
 const Header = (props) => {
 
