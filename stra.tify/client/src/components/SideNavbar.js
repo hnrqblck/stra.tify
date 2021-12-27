@@ -15,7 +15,7 @@ const SideNavbar = (props) => {
                 
                 <nav className='container'>
                     <div>
-                        <Link className={props.podcastHome} to="/podcast-home">  
+                        <Link className={props.podcastHome} to="/podcast-home/">  
                             <HomeIcon boxSize={30} />
                             <span>Início</span>
                         </Link>
