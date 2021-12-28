@@ -69,3 +69,11 @@ export const fetchShow = (spotify, showId) => {
         console.log(show.total_episodes);
     })().catch(e => console.log(e));
 }
+
+export const searchShow = (spotify, query, type, set) => {
+  (async () => {
+    const result = await spotify.search(query, type);
+    set(result.shows.items);
+      // result.items.map
+  })().catch(e => console.log(e));
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
@@ -50,6 +50,11 @@ const PodcastHome = (props) => {
         return hashParams;
     }
 
+    if (params.access_token !== undefined) {
+        localStorage.setItem("Spotify_Token", params.access_token);
+        spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
+    };
+
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
             .then(resp => {
@@ -57,19 +62,17 @@ const PodcastHome = (props) => {
                     name: resp.name,
                 })
             });
+        
 
-        if (params.access_token) {
-            setLoggedIn(true);
+        if (localStorage.getItem("Spotify_Token")) {
+            // setLoggedIn(true);
             fetchMyData(spotifyWebApi, setSpotifyData);
             fetchSavedShows(spotifyWebApi, setLastShow);
             fetchShow(spotifyWebApi, lastShow.id);
         }
     }, []);
     
-    if(params.access_token) {
-        localStorage.setItem("Spotify_Token", params.access_token)
-        spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
-    }
+    
     
     return (
         <div id='podcast-home--page'>
