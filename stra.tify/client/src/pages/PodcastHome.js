@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import { HeadsetIcon, SpotifyIcon } from '../components/CreateIcon';
-import { fetchUserData } from '../services/requestFunctions';
+import { fetchUserData, fetchMyData, fetchSavedShows, fetchShow } from '../services/requestFunctions';
 import BomDia from '../assets/images/bomdia.png';
 import Mamilos from '../assets/images/mamilos.png';
 import ManoAMano from '../assets/images/manoamano.png';
@@ -34,14 +34,11 @@ const myArrow = ({type, onClick, isEdge}) => {
 
 const PodcastHome = (props) => {
     
-    // const spotifyWebApi = Spotify();
     const params = getHashParams();
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({});
-    const [spotifyData, setspotifyData] = useState({});
+    const [spotifyData, setSpotifyData] = useState({});
     const [lastShow, setLastShow] = useState({});
-
-    
     
     function getHashParams() {
         var hashParams = {};
@@ -63,39 +60,15 @@ const PodcastHome = (props) => {
 
         if (params.access_token) {
             setLoggedIn(true);
-            getMyData();
-            getSavedShows();
+            fetchMyData(spotifyWebApi, setSpotifyData);
+            fetchSavedShows(spotifyWebApi, setLastShow);
+            fetchShow(spotifyWebApi, lastShow.id);
         }
     }, []);
     
     if(params.access_token) {
-        spotifyWebApi.setAccessToken(params.access_token);
-    }
-    
-    function getMyData() {
-        (async () => {
-            const me = await spotifyWebApi.getMe();
-            console.log(me);
-            setspotifyData({
-                name: me.display_name,
-                img: me.images[0].url,
-                member: me.product
-            })
-        })().catch(e => console.log(e));
-    }
-    
-    function getSavedShows() {
-        (async () => {
-            const shows = await spotifyWebApi.getMySavedShows();
-            const show = shows.items[0].show;
-            console.log(shows);
-            setLastShow({
-                title: show.name,
-                cover: show.images[0].url,
-                id: show.id
-            })
-            // console.log(show.name); 
-        })().catch(e => console.log(e));
+        localStorage.setItem("Spotify_Token", params.access_token)
+        spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
     }
     
     return (
