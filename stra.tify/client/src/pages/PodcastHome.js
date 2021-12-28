@@ -38,7 +38,8 @@ const PodcastHome = (props) => {
     const params = getHashParams();
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({});
-    const [nowPlaying, setNowPlaying] = useState({name: 'Nothing', image: ''});
+    const [spotifyData, setspotifyData] = useState({});
+    const [lastShow, setLastShow] = useState({});
 
     
     
@@ -53,39 +54,49 @@ const PodcastHome = (props) => {
     }
 
     React.useEffect(() => {
-        if (params.access_token) {
-            setLoggedIn(true);
-        }
-    }, [params]);
-
-    React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
             .then(resp => {
-                console.log(resp);
                 setUserData({
                     name: resp.name,
                 })
-            })
-    }, [])
+            });
+
+        if (params.access_token) {
+            setLoggedIn(true);
+            getMyData();
+            getSavedShows();
+        }
+    }, []);
     
     if(params.access_token) {
         spotifyWebApi.setAccessToken(params.access_token);
     }
     
-    function getNowPlaying() {
-        spotifyWebApi.setAccessToken(params.access_token);
-        spotifyWebApi.getMyCurrentPlaybackState()
-            .then((resp) => {
-                
-                // setNowPlaying({
-                //     name: resp.item.name,
-                //     image: ''
-                // })
-                console.log(resp);
+    function getMyData() {
+        (async () => {
+            const me = await spotifyWebApi.getMe();
+            console.log(me);
+            setspotifyData({
+                name: me.display_name,
+                img: me.images[0].url,
+                member: me.product
             })
-            .catch(e => console.log(e));
+        })().catch(e => console.log(e));
     }
-
+    
+    function getSavedShows() {
+        (async () => {
+            const shows = await spotifyWebApi.getMySavedShows();
+            const show = shows.items[0].show;
+            console.log(shows);
+            setLastShow({
+                title: show.name,
+                cover: show.images[0].url,
+                id: show.id
+            })
+            // console.log(show.name); 
+        })().catch(e => console.log(e));
+    }
     
     return (
         <div id='podcast-home--page'>
@@ -94,14 +105,7 @@ const PodcastHome = (props) => {
             <div className='main'>
 
                 <section className='podcast'>
-                    {/* <div>Now Playing: {nowPlaying.name}</div>
-                    <div>
-                        <img src={nowPlaying.image} />
-                    </div> */}
                     <div className='page-top'>
-                        {/* <Button onClick={getNowPlaying()}>
-                            Check now playing
-                        </Button> */}
                         <a href='http://localhost:8888/' className={(loggedIn ? 'hidden' : '')}>
                             <Button
                                 className='spotify-button'
@@ -114,16 +118,17 @@ const PodcastHome = (props) => {
                                 Entre com Spotify
                             </Button>
                         </a>
-                        <p className='user-greeting'>Olá, {userData.name}.</p>
+                        <img src={spotifyData.img} className='spotify-img'/>
+                        <p className='user-greeting'>Olá, {userData.name}</p>
                     </div>
                     
                     <div className='container'>
-                        <div className='main-img'>
-                            <img src={BomDia} alt='Capa podcast'/>
+                        <div >
+                            <img src={lastShow.cover} alt={`Capa ${lastShow.title}`} className='main-img'/>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>
-                            <h1>Bom dia, Obvious</h1>
+                            <h1>{lastShow.title}</h1>
                             <p>Entre agora na jornada e discuta os episódios</p>
                             <Link to='/episodios'>  
                                 <Button 
