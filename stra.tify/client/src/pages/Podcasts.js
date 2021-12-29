@@ -65,7 +65,7 @@ const Podcasts = () => {
                 <section className='podcasts'>
                     {
                         searchResult.slice(0, 6).map(ep => (
-                            <Link to={`/episodios/${ep.id}`}>
+                            <Link to={`/episodios/${ep.id}`} key={ep.id}>
                                 <img key={ep.id} src={ep.images[1].url}/>
                             </Link>
                         ))

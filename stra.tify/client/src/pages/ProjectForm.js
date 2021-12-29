@@ -11,7 +11,7 @@ import {
     Box
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
-import { fetchUserData, fetchShow, createProject } from '../services/requestFunctions';
+import { fetchUserData, fetchShow, createProject, updateProjectInfo, createConnectionLink } from '../services/requestFunctions';
 import { useForm, FormProvider } from "react-hook-form";
 import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
@@ -54,12 +54,13 @@ const ProjectForm = () => {
         fetchShow(spotifyWebApi, params.id, setShow);
     }, []);
 
-
     const handleCreateProj = (values) => {
-        console.log(values.title);
+        // console.log(values, userData.userId);
         createProject(localStorage.getItem("Access_Token"), values, userData.userId)
         .then((response) => {
-            if (response.data) navigate('/podcast-home')
+            if (response.data) navigate('/podcast-home');
+            updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
+            localStorage.setItem("Project_Id", response.data.id);
         })
         .catch((err) => {
             if (err.message === "Request failed with status code 403") {
@@ -70,7 +71,6 @@ const ProjectForm = () => {
         });
     }
     
-
 
     return (
         <div id='project-form'>
@@ -114,60 +114,60 @@ const ProjectForm = () => {
                                         <RadioGroup onChange={setColor} value={color}>
                                             <Stack spacing={0} direction='row' wrap='wrap' className='colors-picker'>
                                                 <Radio 
-                                                    value='roxo'
+                                                    value='PURPLE'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='roxo'/>
+                                                    <SmallHex className='PURPLE'/>
                                                 </Radio>
                                                 <Radio 
-                                                    value='azul'
+                                                    value='BLUE'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='azul' />
+                                                    <SmallHex className='BLUE' />
                                                 </Radio>
                                                 <Radio 
-                                                    value='laranja'
+                                                    value='ORANGE'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='laranja'/>
+                                                    <SmallHex className='ORANGE'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='amarelo'
+                                                    value='YELLOW'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='amarelo'/>
+                                                    <SmallHex className='YELLOW'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='magenta'
+                                                    value='MAGENTA'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='magenta'/>
+                                                    <SmallHex className='MAGENTA'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='verde'
+                                                    value='GREEN'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='verde'/>
+                                                    <SmallHex className='GREEN'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='rosa'
+                                                    value='PINK'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='rosa'/>
+                                                    <SmallHex className='PINK'/>
                                                 </Radio>
                                             </Stack>
                                         </RadioGroup>

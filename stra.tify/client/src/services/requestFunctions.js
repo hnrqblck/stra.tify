@@ -35,6 +35,23 @@ export const authenticate = async (values) => {
     return data;
   };
 
+  export const createProject = async (token, values, id) => {
+    const response = await api("/projects/v1/project", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        color: values.color,
+        description: values.description,
+        lab_owner_id: id,
+        title: values.title,
+        visibility: 'PUBLIC',
+      },
+    });
+    return response;
+  };
+
   export const fetchUserProjects = async (token) => {
     const { data } = await api("/projects/v1/project", {
       method: "GET",
@@ -45,30 +62,50 @@ export const authenticate = async (values) => {
     return data;
   };
 
-  export const createProject = async (token, values, id) => {
-    let functionReturn;
-    await api("/projects/v1/project", {
-      method: "POST",
-      // headers: {
-      //   Authorization: `Bearer ${token}`,
-      // },
-      auth: {
-        color: 'PINK',
-        description: values.description,
-        lab_owner_id: id,
-        title: values.title,
+  export const fetchProjectById = async (token, id) => {
+    const { data } = await api(`/projects/v1/project/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-    })
-      .then((response) => {
-        functionReturn = response;
-        // console.log(response.data.access_token, response.data.refresh_token);
-      })
-      .catch((err) => {
-        throw Error(err.message);
-      });
-  
-    return functionReturn;
+    });
+    return data;
   };
+
+  export const updateProjectInfo = async (token, values, id) => {
+    const response = await api(`/projects/v1/project/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        color: values.color,
+        title: values.title,
+        description: values.description,
+        visibility: 'PUBLIC',
+      },
+    });
+    console.log(response);
+    return response;
+  };
+
+  // export const createConnectionLink = async (token, id) => {
+  //   const response = await api(`/projects/v1/project/${id}/connection-link`, {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     data: {
+  //       id: id,
+  //     },
+  //   });
+  //   console.log('CONNECTION LINK:' + response);
+  //   return response;
+  // };
+
+
+
+  
 
 
   // SPOTIFY
