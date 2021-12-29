@@ -17,14 +17,15 @@ import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
 import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg';
 import '../styles/project-form.scss';
+import { writeProjectData } from "../services/firebase";
 import Spotify from 'spotify-web-api-js';
-import { database } from '../services/firebase';
+// import { set } from 'firebase/database';
+
 
 const spotifyWebApi = new Spotify();
 
 const ProjectForm = () => {
     const params = useParams();
-    const projectRef = database().ref("Project");
 
     const [userData, setUserData] = React.useState({});
     const [createErrors, setCreateErrors] = React.useState("");
@@ -36,6 +37,7 @@ const ProjectForm = () => {
         cover: '',
         description: ''
     });
+    const [projectData, setProjectData] = React.useState({});
     const navigate = useNavigate();
     const {
         handleSubmit,
@@ -52,31 +54,44 @@ const ProjectForm = () => {
             })
         });
 
+        // const roomRef = database.ref('rooms');
+
+        // roomRef.push(show);
+
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
         fetchShow(spotifyWebApi, params.id, setShow);
     }, []);
 
-    const handleCreateProj = (values) => {
-        createProject(localStorage.getItem("Access_Token"), values, userData.userId)
+    React.useEffect(() => {
+        
+    }, [projectData]);
+
+    async function handleCreateProj (values) {
+        const data = await createProject(localStorage.getItem("Access_Token"), values, userData.userId)
         .then((response) => {
             if (response.data) navigate('/podcast-home');
             updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
-            const projectData = {
-                project_id: response.data.id,
-                show_id: params.id,
-                title: response.data.title,
-                description: response.data.description,
-                color: response.data.color,
-            }
-            projectRef.push(projectData);
+            writeProjectData(response.data.id, response.data.title, params.id)
+            
         })
         .catch((err) => {
             if (err.message === "Request failed with status code 403") {
-            setCreateErrors("Não é possível criar a jornada!");
+                setCreateErrors("Não é possível criar a jornada!");
             } else {
-            setCreateErrors(err.message);
+                setCreateErrors(err.message);
             }
         });
+        // writeProjectData(data.data.id, data.data.title, params.id)
+        // setProjectData({
+        //     id: data.data.id,
+        //     title: data.data.title,
+        //     description: data.data.description,
+        //     color: data.data.color,
+        //     created_at: data.data.created_at,
+        // });
+        // console.log(projectData)
+        // return data.data;
+        
     }
     
 

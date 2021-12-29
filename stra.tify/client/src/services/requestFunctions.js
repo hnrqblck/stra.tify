@@ -1,4 +1,3 @@
-import { set } from 'react-hook-form';
 import api from './api';
 
 // -------------- STRATEEGIA
@@ -46,7 +45,6 @@ export const authenticate = async (values) => {
         description: values.description,
         lab_owner_id: id,
         title: values.title,
-        visibility: 'PUBLIC',
       },
     });
     return response;
@@ -85,7 +83,7 @@ export const authenticate = async (values) => {
         visibility: 'PUBLIC',
       },
     });
-    console.log(response);
+    // console.log(response);
     return response;
   };
 
