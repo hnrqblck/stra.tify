@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import PodcastHome from './pages/PodcastHome';
 import PodcastEps from './pages/PodcastEps';
 import Podcasts from './pages/Podcasts';
+import ProjectForm from './pages/ProjectForm';
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
           {/* <Route path="/podcast-home/" element={ <PodcastHome />}> */}
           <Route path="/podcast-home/" element={ <PodcastHome />}/>
           <Route path="/podcasts" element={ <Podcasts />} />
-          <Route path="/episodios" element={ <PodcastEps />} />
+          <Route path="/episodios/:id" element={ <PodcastEps />} />
+          <Route path="/create-project/:id" element={ <ProjectForm />} />
         </Routes>
       </BrowserRouter>
     </div>

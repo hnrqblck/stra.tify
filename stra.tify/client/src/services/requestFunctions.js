@@ -1,3 +1,4 @@
+import { set } from 'react-hook-form';
 import api from './api';
 
 // -------------- STRATEEGIA
@@ -34,6 +35,41 @@ export const authenticate = async (values) => {
     return data;
   };
 
+  export const fetchUserProjects = async (token) => {
+    const { data } = await api("/projects/v1/project", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  };
+
+  export const createProject = async (token, values, id) => {
+    let functionReturn;
+    await api("/projects/v1/project", {
+      method: "POST",
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+      auth: {
+        color: 'PINK',
+        description: values.description,
+        lab_owner_id: id,
+        title: values.title,
+      },
+    })
+      .then((response) => {
+        functionReturn = response;
+        // console.log(response.data.access_token, response.data.refresh_token);
+      })
+      .catch((err) => {
+        throw Error(err.message);
+      });
+  
+    return functionReturn;
+  };
+
 
   // SPOTIFY
 
@@ -60,18 +96,22 @@ export const fetchSavedShows = (spotify, set) => {
     })().catch(e => console.log(e));
 }
 
-export const fetchShow = (spotify, showId) => {
+export const fetchShow = (spotify, showId, set) => {
     (async () => {
         const show = await spotify.getShow(showId);
-        console.log(show);
-        console.log(show.name);
-        console.log(show.publisher);
-        console.log(show.total_episodes);
+        set({
+          title: show.name,
+          publisher: show.publisher,
+          episodes: show.episodes.items,
+          cover: show.images[0].url,
+          description: show.description,
+        })
     })().catch(e => console.log(e));
 }
 
-export const searchShow = (spotify, query, type, set) => {
+export const searchShow = (spotify, query, set) => {
   (async () => {
+    const type = ['show']
     const result = await spotify.search(query, type);
     set(result.shows.items);
       // result.items.map

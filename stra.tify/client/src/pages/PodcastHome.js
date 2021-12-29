@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import { HeadsetIcon, SpotifyIcon } from '../components/CreateIcon';
-import { fetchUserData, fetchMyData, fetchSavedShows, fetchShow } from '../services/requestFunctions';
+import { fetchUserData, fetchMyData, fetchSavedShows } from '../services/requestFunctions';
 import BomDia from '../assets/images/bomdia.png';
 import Mamilos from '../assets/images/mamilos.png';
 import ManoAMano from '../assets/images/manoamano.png';
@@ -68,7 +68,6 @@ const PodcastHome = (props) => {
             // setLoggedIn(true);
             fetchMyData(spotifyWebApi, setSpotifyData);
             fetchSavedShows(spotifyWebApi, setLastShow);
-            fetchShow(spotifyWebApi, lastShow.id);
         }
     }, []);
     
@@ -106,7 +105,7 @@ const PodcastHome = (props) => {
                             <p>Podcast</p>
                             <h1>{lastShow.title}</h1>
                             <p>Entre agora na jornada e discuta os episódios</p>
-                            <Link to='/episodios'>  
+                            <Link to={'/episodios/' + lastShow.id}>  
                                 <Button 
                                     className='main-button'
                                     bg='#C4C4C4'

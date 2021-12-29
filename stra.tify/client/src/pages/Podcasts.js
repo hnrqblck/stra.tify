@@ -1,13 +1,10 @@
 import React from 'react';
 import { Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { useForm, FormProvider } from "react-hook-form";
+import { Link } from 'react-router-dom';
 import { SearchIcon } from '@chakra-ui/icons'
 import { searchShow } from '../services/requestFunctions';
 import SideNavbar from '../components/SideNavbar';
-import BomDia from '../assets/images/bomdia.png';
-import Mamilos from '../assets/images/mamilos.png';
-import ManoAMano from '../assets/images/manoamano.png';
-import NaoIviabilize from '../assets/images/nao-inviabilize.png';
 import '../styles/podcasts.scss'
 import Spotify from 'spotify-web-api-js';
 
@@ -25,7 +22,7 @@ const Podcasts = () => {
 
     React.useEffect(() => {
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
-        searchShow(spotifyWebApi, query , ["show"], setSearchResult);
+        searchShow(spotifyWebApi, query, setSearchResult);
 
         // if (localStorage.getItem("Spotify_Token")) {
         //     searchShow(spotifyWebApi, "Bom dia obvious" , ["show"] );
@@ -67,8 +64,10 @@ const Podcasts = () => {
                 </FormProvider>
                 <section className='podcasts'>
                     {
-                        searchResult.map(ep => (
-                            <img key={ep.id} src={ep.images[1].url}/>
+                        searchResult.slice(0, 6).map(ep => (
+                            <Link to={`/episodios/${ep.id}`}>
+                                <img key={ep.id} src={ep.images[1].url}/>
+                            </Link>
                         ))
                     }
                 </section>
