@@ -1,13 +1,9 @@
-import React, { useState} from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
 import { HeadsetIcon, SpotifyIcon } from '../components/CreateIcon';
-import { fetchUserData, fetchMyData, fetchSavedShows } from '../services/requestFunctions';
-import BomDia from '../assets/images/bomdia.png';
-import Mamilos from '../assets/images/mamilos.png';
-import ManoAMano from '../assets/images/manoamano.png';
-import NaoIviabilize from '../assets/images/nao-inviabilize.png';
+import { fetchUserData, fetchMyData } from '../services/requestFunctions';
 import Carousel, { consts } from 'react-elastic-carousel';
 import Item from './Item';
 import SideNavbar from '../components/SideNavbar';
@@ -36,12 +32,11 @@ const myArrow = ({type, onClick, isEdge}) => {
 
 const PodcastHome = () => {
     
-    const params = getHashParams();
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [userData, setUserData] = useState({});
-    const [spotifyData, setSpotifyData] = useState({});
-    const [shows, setShows] = useState({});
-    const [randomShow, setRandomShow] = useState({});
+    const [loggedIn, setLoggedIn] = React.useState(false);
+    const [userData, setUserData] = React.useState({});
+    const [spotifyData, setSpotifyData] = React.useState({});
+    const [shows, setShows] = React.useState({});
+    const [randomShow, setRandomShow] = React.useState({});
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -50,30 +45,9 @@ const PodcastHome = () => {
                     name: resp.name,
                 })
             });
-        
 
-        if (localStorage.getItem("Spotify_Token")) {
-            // setLoggedIn(true);
-            fetchMyData(spotifyWebApi, setSpotifyData);
-        }
-
-        readProjectData();
+            readProjectData();
     }, []);
-    
-    function getHashParams() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-        q = window.location.hash.substring(1);
-        while ( e = r.exec(q)) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams;
-    }
-
-    if (params.access_token !== undefined) {
-        localStorage.setItem("Spotify_Token", params.access_token);
-        spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
-    };
 
     function readProjectData() {
         const db = getDatabase(app);
@@ -103,19 +77,6 @@ const PodcastHome = () => {
 
                 <section className='podcast'>
                     <div className='page-top'>
-                        <a href='http://localhost:8888/' className={(loggedIn ? 'hidden' : '')}>
-                            <Button
-                                className='spotify-button'
-                                leftIcon={<SpotifyIcon />}
-                                bg='#363333'
-                                color='#ffff'
-                                borderRadius='100px'
-                                _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
-                                >
-                                Entre com Spotify
-                            </Button>
-                        </a>
-                        <img src={spotifyData.img} className='spotify-img'/>
                         <p className='user-greeting'>Olá, {userData.name}</p>
                     </div>
                     
