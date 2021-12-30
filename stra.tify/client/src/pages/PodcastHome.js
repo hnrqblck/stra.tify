@@ -40,7 +40,7 @@ const PodcastHome = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({});
     const [spotifyData, setSpotifyData] = useState({});
-    const [lastShow, setLastShow] = useState({});
+    const [shows, setShows] = useState({});
     const [randomShow, setRandomShow] = useState({});
 
     React.useEffect(() => {
@@ -55,11 +55,9 @@ const PodcastHome = () => {
         if (localStorage.getItem("Spotify_Token")) {
             // setLoggedIn(true);
             fetchMyData(spotifyWebApi, setSpotifyData);
-            fetchSavedShows(spotifyWebApi, setLastShow);
         }
 
         readProjectData();
-        console.log(randomShow);
     }, []);
     
     function getHashParams() {
@@ -88,16 +86,14 @@ const PodcastHome = () => {
             }
             const rnd = arr[randomNumber(0, arr.length)];
             const oneShow = data[rnd];
-            // setRandomShow(oneShow);
-            setRandomShow({spotifyId: rnd, ...oneShow});
+            setRandomShow(oneShow);
+            setShows(data);
         })
       };
 
       function randomNumber(min, max) { 
         return Math.floor(Math.random() * (max - min) + min);
     } 
-    
-    
     
     return (
         <div id='podcast-home--page'>
@@ -131,7 +127,7 @@ const PodcastHome = () => {
                             <p>Podcast</p>
                             <h1>{randomShow.title}</h1>
                             <p>Entre agora na jornada e discuta os episódios</p>
-                            <Link to={'/episodios/' + randomShow.spotifyId}>  
+                            <Link to={'/episodios/' + randomShow.showId}>  
                                 <Button 
                                     className='main-button'
                                     bg='#C4C4C4'
@@ -154,11 +150,14 @@ const PodcastHome = () => {
                     <div className='container'>
                         <div>
                             <Carousel breakPoints={breakPoints}  enableMouseSwipe enableSwipe renderArrow={myArrow}>
-                                <Item><img src={Mamilos} alt='Capa podcast'/></Item>
-                                <Item><img src={ManoAMano} alt='Capa podcast'/></Item>
-                                <Item><img src={NaoIviabilize} alt='Capa podcast'/></Item>
-                                <Item><img src={BomDia} alt='Capa podcast'/></Item>
-                            </Carousel>
+                            {
+                                Object.entries(shows).slice(0, 10).map(show => (
+                                    <Link to={'/episodios/' + show[1].showId} key={show[0]}>
+                                        <Item key={show[1].showId}><img src={show[1].cover} alt='Capa podcast' key={show[1].projectId}/></Item>
+                                    </Link>    
+                                ))
+                            }
+                            </Carousel> 
                         </div>
                     </div>
                 </section>

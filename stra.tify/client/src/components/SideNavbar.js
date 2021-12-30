@@ -7,6 +7,11 @@ import { HomeIcon, AccountIcon, ExitIcon } from './CreateIcon';
 import { SettingsIcon } from '@chakra-ui/icons'
 import '../styles/sidenavbar.scss';
 
+function logOff() {
+    localStorage.removeItem('Access_Token');
+    localStorage.removeItem('Refresh_Token');
+}
+
 const SideNavbar = (props) => {
     return (
         <Flex id='side-navbar'>
@@ -26,17 +31,15 @@ const SideNavbar = (props) => {
                             <span>Podcasts</span>
                         </Link>
                     </div>
-                    <div >
-                        <AccountIcon boxSize={30}/>
-                        <span>Minha conta</span>
-                    </div>
                     <div>
                         <SettingsIcon w={30} h={30}/>
                         <span>Configurações</span>
                     </div>
                     <div>
-                        <ExitIcon boxSize={30} />
-                        <span>Sair</span>
+                        <Link className={props.home} to="/" onClick={logOff}>
+                            <ExitIcon boxSize={30} />
+                            <span>Sair</span>
+                        </Link>
                     </div>
                 </nav>
             </Center>

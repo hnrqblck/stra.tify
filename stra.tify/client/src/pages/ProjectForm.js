@@ -90,6 +90,7 @@ const ProjectForm = () => {
                 publisher: publisher,
                 cover: cover,
                 description: description,
+                showId: spotifyId,
             });
           };
         
