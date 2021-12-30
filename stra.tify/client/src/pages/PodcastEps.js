@@ -4,6 +4,8 @@ import { fetchUserData, fetchShow } from '../services/requestFunctions';
 import SideNavbar from '../components/SideNavbar';
 import '../styles/episodes.scss'
 import { useParams, Link} from 'react-router-dom';
+// import { readProjectData } from '../services/firebase';
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import Spotify from 'spotify-web-api-js';
 
 const spotifyWebApi = new Spotify();
@@ -12,6 +14,7 @@ const PodcastEps = () => {
     const params = useParams();
 
     const [userData, setUserData] = React.useState({});
+    const [showDb, setShowDb] = React.useState(false);
     const [show, setShow] = React.useState({
         title: '',
         publisher: '',
@@ -29,7 +32,10 @@ const PodcastEps = () => {
 
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
         fetchShow(spotifyWebApi, params.id, setShow);
+
+        readProjectData(params.id);
     }, []);
+    
     
     function msToHMS(ms) {
         const hms = new Date(ms).toISOString().slice(11,19);
@@ -41,6 +47,17 @@ const PodcastEps = () => {
         const dArr = dateStr.split("-"); 
         return dArr[2]+ "/" +dArr[1]+ "/" +dArr[0].substring(2);
     }
+
+    function readProjectData(spotifyId) {
+        const db = getDatabase();
+        const readProjectRef = ref(db, 'projects/' + spotifyId);
+        onValue(readProjectRef, (snapshot) => {
+          const data = snapshot.val();
+          console.log(data)
+          if (data !== null) setShowDb(true);
+        })
+        // console.log(showDb)
+      };
 
 
     return (
@@ -62,7 +79,8 @@ const PodcastEps = () => {
                             <p>Podcast</p>
                             <h1>{show.title}</h1>
                             <p>{show.publisher}</p>
-                            <Link to={`/create-project/${params.id}`}>
+                            {showDb ? '' :
+                                <Link to={`/create-project/${params.id}`}>
                                 <Button
                                     className='create-button'
                                     bg='#2CD648'
@@ -72,7 +90,8 @@ const PodcastEps = () => {
                                 >
                                     Criar jornada
                                 </Button>
-                            </Link>
+                            </Link>}
+                            
                         </div>
                     </div>
                 </section>

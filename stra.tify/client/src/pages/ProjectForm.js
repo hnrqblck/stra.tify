@@ -69,7 +69,7 @@ const ProjectForm = () => {
     async function handleCreateProj (values) {
         const data = await createProject(localStorage.getItem("Access_Token"), values, userData.userId)
         .then((response) => {
-            if (response.data) navigate('/podcast-home');
+            if (response.data) navigate(`/episodios/${params.id}`);
             updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
             writeProjectData(response.data.id, response.data.title, params.id)
             
