@@ -12,6 +12,8 @@ import Carousel, { consts } from 'react-elastic-carousel';
 import Item from './Item';
 import SideNavbar from '../components/SideNavbar';
 import '../styles/podcast-home.scss'
+import { getDatabase, ref, onValue } from "firebase/database";
+import { app } from '../services/firebase';
 import Spotify from 'spotify-web-api-js';
 
 const spotifyWebApi = new Spotify();
@@ -32,13 +34,33 @@ const myArrow = ({type, onClick, isEdge}) => {
     );
 }
 
-const PodcastHome = (props) => {
+const PodcastHome = () => {
     
     const params = getHashParams();
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({});
     const [spotifyData, setSpotifyData] = useState({});
     const [lastShow, setLastShow] = useState({});
+    const [randomShow, setRandomShow] = useState({});
+
+    React.useEffect(() => {
+        fetchUserData(localStorage.getItem("Access_Token"))
+            .then(resp => {
+                setUserData({
+                    name: resp.name,
+                })
+            });
+        
+
+        if (localStorage.getItem("Spotify_Token")) {
+            // setLoggedIn(true);
+            fetchMyData(spotifyWebApi, setSpotifyData);
+            fetchSavedShows(spotifyWebApi, setLastShow);
+        }
+
+        readProjectData();
+        console.log(randomShow);
+    }, []);
     
     function getHashParams() {
         var hashParams = {};
@@ -55,21 +77,25 @@ const PodcastHome = (props) => {
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
     };
 
-    React.useEffect(() => {
-        fetchUserData(localStorage.getItem("Access_Token"))
-            .then(resp => {
-                setUserData({
-                    name: resp.name,
-                })
-            });
-        
+    function readProjectData() {
+        const db = getDatabase(app);
+        const readProjectRef = ref(db, 'projects/');
+        onValue(readProjectRef, (snapshot) => {
+            const data = snapshot.val();
+            const arr = [];
+            for (const show in data) {
+                arr.push(show);
+            }
+            const rnd = arr[randomNumber(0, arr.length)];
+            const oneShow = data[rnd];
+            // setRandomShow(oneShow);
+            setRandomShow({spotifyId: rnd, ...oneShow});
+        })
+      };
 
-        if (localStorage.getItem("Spotify_Token")) {
-            // setLoggedIn(true);
-            fetchMyData(spotifyWebApi, setSpotifyData);
-            fetchSavedShows(spotifyWebApi, setLastShow);
-        }
-    }, []);
+      function randomNumber(min, max) { 
+        return Math.floor(Math.random() * (max - min) + min);
+    } 
     
     
     
@@ -99,13 +125,13 @@ const PodcastHome = (props) => {
                     
                     <div className='container'>
                         <div >
-                            <img src={lastShow.cover} alt={`Capa ${lastShow.title}`} className='main-img'/>
+                            <img src={randomShow.cover} alt={`Capa ${randomShow.title}`} className='main-img'/>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>
-                            <h1>{lastShow.title}</h1>
+                            <h1>{randomShow.title}</h1>
                             <p>Entre agora na jornada e discuta os episódios</p>
-                            <Link to={'/episodios/' + lastShow.id}>  
+                            <Link to={'/episodios/' + randomShow.spotifyId}>  
                                 <Button 
                                     className='main-button'
                                     bg='#C4C4C4'

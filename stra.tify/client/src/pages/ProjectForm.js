@@ -17,7 +17,7 @@ import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
 import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg';
 import '../styles/project-form.scss';
-import { writeProjectData } from "../services/firebase";
+import { getDatabase, ref, set } from "firebase/database";
 import Spotify from 'spotify-web-api-js';
 // import { set } from 'firebase/database';
 
@@ -71,7 +71,7 @@ const ProjectForm = () => {
         .then((response) => {
             if (response.data) navigate(`/episodios/${params.id}`);
             updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
-            writeProjectData(response.data.id, response.data.title, params.id)
+            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
             
         })
         .catch((err) => {
@@ -81,6 +81,18 @@ const ProjectForm = () => {
                 setCreateErrors(err.message);
             }
         });
+
+        function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
+            const db = getDatabase();
+            set(ref(db, 'projects/' + spotifyId), {
+                projectId: projectId,
+                title: title,
+                publisher: publisher,
+                cover: cover,
+                description: description,
+            });
+          };
+        
         // writeProjectData(data.data.id, data.data.title, params.id)
         // setProjectData({
         //     id: data.data.id,

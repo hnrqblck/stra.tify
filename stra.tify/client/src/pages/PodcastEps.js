@@ -5,7 +5,8 @@ import SideNavbar from '../components/SideNavbar';
 import '../styles/episodes.scss'
 import { useParams, Link} from 'react-router-dom';
 // import { readProjectData } from '../services/firebase';
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { app } from '../services/firebase';
 import Spotify from 'spotify-web-api-js';
 
 const spotifyWebApi = new Spotify();
@@ -49,7 +50,7 @@ const PodcastEps = () => {
     }
 
     function readProjectData(spotifyId) {
-        const db = getDatabase();
+        const db = getDatabase(app);
         const readProjectRef = ref(db, 'projects/' + spotifyId);
         onValue(readProjectRef, (snapshot) => {
           const data = snapshot.val();
@@ -90,7 +91,7 @@ const PodcastEps = () => {
                                 >
                                     Criar jornada
                                 </Button>
-                            </Link>}
+                            </Link> }
                             
                         </div>
                     </div>
