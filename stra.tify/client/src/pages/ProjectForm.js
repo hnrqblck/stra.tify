@@ -42,6 +42,7 @@ const ProjectForm = () => {
     const {
         handleSubmit,
         register,
+        setValue 
     } = useForm();
 
 
@@ -94,17 +95,6 @@ const ProjectForm = () => {
             });
           };
         
-        // writeProjectData(data.data.id, data.data.title, params.id)
-        // setProjectData({
-        //     id: data.data.id,
-        //     title: data.data.title,
-        //     description: data.data.description,
-        //     color: data.data.color,
-        //     created_at: data.data.created_at,
-        // });
-        // console.log(projectData)
-        // return data.data;
-        
     }
     
 
@@ -125,7 +115,8 @@ const ProjectForm = () => {
                     <h1>Criar Jornada {show.title}</h1>
                         <FormProvider>
                             <form onSubmit={handleSubmit(handleCreateProj)}>
-                                <FormControl id='project' className='form-container'>
+                                <FormControl id='project'>
+                                <div className='form-container'>
                                     <div>
                                         <FormLabel>Título</FormLabel>
                                         <Input 
@@ -208,10 +199,14 @@ const ProjectForm = () => {
                                             </Stack>
                                         </RadioGroup>
                                     </div>
+                                    </div>
                                     </FormControl>
                                     {createErrors && <Box color="#dc0362">{createErrors}</Box>}
                                     <Button
-                                        // isLoading={isSubmitting}
+                                        onClick={() => {
+                                            setValue('title', show.title);
+                                            setValue('description', show.description);
+                                        }}
                                         className='btn-login'
                                         bg='#2CD648'
                                         color='#ffff'

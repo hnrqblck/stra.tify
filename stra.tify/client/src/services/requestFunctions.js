@@ -142,7 +142,7 @@ export const fetchShow = (spotify, showId, set) => {
           cover: show.images[0].url,
           description: show.description,
         })
-        console.log(show);
+        
     })().catch(e => console.log(e));
 }
 
