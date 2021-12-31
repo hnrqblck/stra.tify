@@ -18,7 +18,7 @@ const Podcasts = () => {
     const params = getHashParams();
     const [query, setQuery] = React.useState('');
     const [shows, setShows] = React.useState({});
-    const [spotifyData, setSpotifyData] = React.useState({});
+    const [spotifyData, setSpotifyData] = React.useState(false);
     const [searchResult, setSearchResult] = React.useState([]);
 
     const {
@@ -32,7 +32,6 @@ const Podcasts = () => {
         }
 
         readProjectData();
-        console.log(searchResult);
     }, [])
 
     React.useEffect(() => {
@@ -87,7 +86,7 @@ const Podcasts = () => {
                                 children={<SearchIcon color='grey' />}
                                 />
                                 <Input
-                                {...(spotifyData.img ? '' : 'isReadOnly')}
+                                isReadOnly={spotifyData ? false : true}
                                 {...register("searchContent")}
                                 type='text' placeholder='Busque por título'/>
                             </InputGroup>
