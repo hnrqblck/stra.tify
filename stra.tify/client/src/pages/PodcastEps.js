@@ -16,6 +16,7 @@ const PodcastEps = () => {
 
     const [userData, setUserData] = React.useState({});
     const [showDb, setShowDb] = React.useState(false);
+    const [readShow, setReadShow] = React.useState({});
     const [show, setShow] = React.useState({
         title: '',
         publisher: '',
@@ -56,10 +57,9 @@ const PodcastEps = () => {
           const data = snapshot.val();
           console.log(data)
           if (data !== null) setShowDb(true);
+          setReadShow(data);
         })
-        // console.log(showDb)
       };
-
 
     return (
         <div id='podcast-home--page'>
@@ -74,12 +74,12 @@ const PodcastEps = () => {
                     
                     <div className='container'>
                         <div className='pod-img'>
-                            <img src={show.cover} alt='Capa podcast'/>
+                            <img src={ showDb ? readShow.cover : show.cover } alt='Capa podcast'/>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>
-                            <h1>{show.title}</h1>
-                            <p>{show.publisher}</p>
+                            <h1>{ showDb ? readShow.title : show.title}</h1>
+                            <p>{ showDb ? readShow.publisher : show.publisher}</p>
                             {showDb ? '' :
                                 <Link to={`/create-project/${params.id}`}>
                                 <Button
@@ -100,7 +100,8 @@ const PodcastEps = () => {
                 <section className='episodes'>
                     <div className='container'>
                         {
-                            show.episodes.slice(0, 10).map(episode => (
+                            (showDb ? readShow : show).episodes.slice(0, 10).map((episode, index) => (
+                                
                                 <div key={episode.id}>
                                     <div className='episode'>
                                         <img src={episode.images[0].url} />
@@ -108,15 +109,21 @@ const PodcastEps = () => {
                                             <h2>{episode.name}</h2>
                                             <p>{reformatDate(episode.release_date)} - { msToHMS(episode.duration_ms) }</p>
                                         </div>
-                                        <Button
-                                            className='create-button'
-                                            bg='#E169AA'
-                                            color='#ffff'
-                                            borderRadius='100px'
-                                            _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
-                                        >
-                                            Ver kit
-                                        </Button>
+                                        {
+                                            (showDb ? 
+                                                <Link to={`/create-kit/${readShow.showId}/${index} `}>
+                                                    <Button
+                                                        className='create-button'
+                                                        bg='#2CD648'
+                                                        color='#ffff'
+                                                        borderRadius='100px'
+                                                        _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                                    >
+                                                        Criar kit
+                                                    </Button>
+                                                </Link>
+                                                : '')
+                                        }
                                     </div>
                                     <div className='divider'></div>
                                 </div>

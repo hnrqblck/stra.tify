@@ -50,6 +50,65 @@ export const authenticate = async (values) => {
     return response;
   };
 
+  export const createMap = async (token, id) => {
+    const response = await api(`/projects/v1/project/${id}/map`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        title: 'Podcast',
+      },
+    });
+    return response;
+  };
+  
+  export const createKit = async (token, values, refTitle, refUrl) => {
+    const response = await api("/tools/v1/kit", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        color: values.color,
+        description: values.description,
+        questions: [{
+          question: 'O que achou deste episódio?',
+        },
+        {
+          question: 'O que você gostaria de ouvir nos próximos encontros?',
+        },
+        {
+          question: 'O que você gostaria de indicar?',
+        },
+      ],
+        references: [{
+          description: refTitle,
+          url: refUrl,
+        }],
+        title: values.title,
+      },
+    });
+    return response;
+  };
+
+  export const createDivPoint = async (token, id, col, row, toolId) => {
+    const response = await api(`/projects/v1/map/${id}/divergence-point`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        position: {
+          col: col,
+          row: row,
+        },
+        tool_id: toolId,
+      },
+    });
+    return response;
+  };
+
   export const fetchUserProjects = async (token) => {
     const { data } = await api("/projects/v1/project", {
       method: "GET",
@@ -67,6 +126,7 @@ export const authenticate = async (values) => {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(data);
     return data;
   };
 
@@ -83,7 +143,7 @@ export const authenticate = async (values) => {
         visibility: 'PUBLIC',
       },
     });
-    // console.log(response);
+    console.log(response);
     return response;
   };
 

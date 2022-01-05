@@ -6,6 +6,7 @@ import PodcastHome from './pages/PodcastHome';
 import PodcastEps from './pages/PodcastEps';
 import Podcasts from './pages/Podcasts';
 import ProjectForm from './pages/ProjectForm';
+import KitForm from './pages/KitForm';
 
 function App() {
 
@@ -13,13 +14,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <Home />} />
-          <Route path="/login" element={ <Login />} />
-          {/* <Route path="/podcast-home/" element={ <PodcastHome />}> */}
-          <Route path="/podcast-home/" element={ <PodcastHome />}/>
-          <Route path="/podcasts" element={ <Podcasts />} />
-          <Route path="/episodios/:id" element={ <PodcastEps />} />
-          <Route path="/create-project/:id" element={ <ProjectForm />} />
+          <Route exact path="/" element={ <Home />} />
+          <Route exact path="/login" element={ <Login />} />
+          {/* <Roexact ute path="/podcast-home/" element={ <PodcastHome />}> */}
+          <Route exact path="/podcast-home/" element={ <PodcastHome />}/>
+          <Route exact path="/podcasts" element={ <Podcasts />} />
+          <Route exact path="/episodios/:id" element={ <PodcastEps />} />
+          <Route exact path="/create-project/:id" element={ <ProjectForm />} />
+          <Route exact path="/create-kit/:showId/:epId" element={ <KitForm />} />
         </Routes>
       </BrowserRouter>
     </div>

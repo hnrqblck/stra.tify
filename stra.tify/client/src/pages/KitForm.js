@@ -8,41 +8,42 @@ import {
     Radio,
     RadioGroup,
     Textarea,
-    Box
+    Select,
+    Box,
+    InputGroup, 
+    InputRightElement
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
-import { fetchUserData, fetchShow, createProject, updateProjectInfo, createMap } from '../services/requestFunctions';
+import { fetchUserData, createKit, createDivPoint } from '../services/requestFunctions';
 import { useForm, FormProvider } from "react-hook-form";
 import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
 import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg';
-import '../styles/project-form.scss';
-import { getDatabase, ref, set, update } from "firebase/database";
-import Spotify from 'spotify-web-api-js';
-// import { set } from 'firebase/database';
+import '../styles/kit-form.scss';
+import { getDatabase, ref, onValue } from "firebase/database";
+import { app } from '../services/firebase';
+// import Spotify from 'spotify-web-api-js';
 
 
-const spotifyWebApi = new Spotify();
+// const spotifyWebApi = new Spotify();
 
-const ProjectForm = () => {
-    const params = useParams();
+const KitForm = () => {
+    const { showId, epId } = useParams();
 
     const [userData, setUserData] = React.useState({});
     const [createErrors, setCreateErrors] = React.useState("");
+    const [kitId, setKitId] = React.useState('');
+    const [tags, setTags] = React.useState(['O que achou deste episódio?', 'O que você gostaria de ouvir nos próximos encontros?', 'O que você gostaria de indicar?']);
     const [color, setColor] = React.useState('rosa');
-    const [show, setShow] = React.useState({
-        title: '',
-        publisher: '',
-        episodes: [],
-        cover: '',
-        description: ''
-    });
+    const [show, setShow] = React.useState({});
+    // const [episodeId, setEpisodeId] = React.useState(epId);
+    const [episode, setEpisode] = React.useState({});
     const [projectData, setProjectData] = React.useState({});
     const navigate = useNavigate();
     const {
         handleSubmit,
         register,
-        setValue 
+        setValue, 
     } = useForm();
 
 
@@ -54,31 +55,40 @@ const ProjectForm = () => {
                 userId: resp.id, 
             })
         });
-
-        // const roomRef = database.ref('rooms');
-
-        // roomRef.push(show);
-
-        spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
-        fetchShow(spotifyWebApi, params.id, setShow);
+        readProjectData(showId, epId);
+        // spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
+        // fetchShow(spotifyWebApi, params.id, setShow);
     }, []);
-
-    React.useEffect(() => {
+    
+    // React.useEffect(() => {
+    //     console.log(episodeId)
         
-    }, [projectData]);
+    // }, [episodeId]);
 
-    async function handleCreateProj (values) {
-        const data = await createProject(localStorage.getItem("Access_Token"), values, userData.userId)
+    function readProjectData(spotifyId, epId) {
+        const db = getDatabase(app);
+        const readProjectRef = ref(db, 'projects/' + spotifyId);
+        onValue(readProjectRef, (snapshot) => {
+          const data = snapshot.val();
+        //   console.log(data);
+          setShow(data);
+        })
+        const readEpRef = ref(db, 'projects/' + spotifyId + '/episodes/' + epId);
+        onValue(readEpRef, (snapshot) => {
+          const data = snapshot.val();
+        //   console.log(data);
+          setEpisode(data);
+        })
+     };
+    //  console.log(episode.external_urls.spotify);
+
+    async function handleCreateKit (values) {
+        // console.log(values);
+        const data = await createKit(localStorage.getItem("Access_Token"), values, episode.name, episode.external_urls.spotify)
         .then((response) => {
-            console.log(response.data.maps)
-            if (response.data) navigate(`/episodios/${params.id}`);
-            updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
-            console.log(projectData)
-            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
-            createMap(localStorage.getItem("Access_Token"), response.data.id)
-            .then(response => {
-                updateProjectData(params.id, response.data.id)
-            })
+            if (response.data) navigate(`/episodios/${showId}`);
+            createDivPoint(localStorage.getItem("Access_Token"), show.map, 0, 1, response.data.id)
+            // writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
             
         })
         .catch((err) => {
@@ -89,31 +99,24 @@ const ProjectForm = () => {
             }
         });
 
-        function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
-            const db = getDatabase();
-            set(ref(db, 'projects/' + spotifyId), {
-                projectId: projectId,
-                title: title,
-                publisher: publisher,
-                cover: cover,
-                description: description,
-                showId: spotifyId,
-                episodes: show.episodes,
-            });
-        }
-
-        function updateProjectData(spotifyId, maps) {
-            const db = getDatabase();
-            update(ref(db, 'projects/' + spotifyId), {
-                map: maps,
-            });
-        }
-    
+        // function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
+        //     const db = getDatabase();
+        //     set(ref(db, 'projects/' + spotifyId), {
+        //         projectId: projectId,
+        //         title: title,
+        //         publisher: publisher,
+        //         cover: cover,
+        //         description: description,
+        //         showId: spotifyId,
+        //         episodes: show.episodes,
+        //     });
+        //   };
+        
     }
     
 
     return (
-        <div id='project-form'>
+        <div id='kit-form'>
             <SideNavbar className='sidenav'/>
 
             <div className='main'>
@@ -123,12 +126,40 @@ const ProjectForm = () => {
                         <p className='user-greeting'>Olá, {userData.name}</p>
                     </div>
                 </section>
+
+                <section className='details-header'>
+                    <FormProvider>
+                        <form className='details-form'>
+                            <div className='podcast'>
+                                <FormLabel>Podcast</FormLabel>
+                                <Select placeholder={show.title}></Select>
+                            </div>
+                            <div className='episode'>
+                                <FormLabel>Episódio</FormLabel>
+                                <Select placeholder={episode.name}>
+                                    {/* {
+                                        show.episodes.map((episode, index) => (
+                                            <option value={index}>{episode.name}</option>
+                                        ))
+                                    } */}
+                                </Select>
+                            </div>
+                        </form>
+                    </FormProvider>
+                    <div className='mini-banner'>
+                        {/* <img src={episode.images[1].url}/> */}
+                        <div className='text'>
+                            <h2>{episode.name}</h2>
+                            <p>{show.title}</p>
+                        </div>
+                    </div>
+                </section>
                 
                 <section className='form'>
                     <div className='container'>
-                    <h1>Criar Jornada {show.title}</h1>
+                    {/* <h1>Criar Kit {show.title}</h1> */}
                         <FormProvider>
-                            <form onSubmit={handleSubmit(handleCreateProj)}>
+                            <form onSubmit={handleSubmit(handleCreateKit)}>
                                 <FormControl id='project'>
                                 <div className='form-container'>
                                     <div>
@@ -137,21 +168,24 @@ const ProjectForm = () => {
                                             isReadOnly
                                             id='title'
                                             type='text'
-                                            value={show.title}
+                                            value={episode.name}
                                             {...register("title")}
                                         />
                                         <FormLabel>Descrição</FormLabel>
                                         <Textarea 
                                             isReadOnly
                                             id='description'
-                                            value={show.description.slice(0, 299)}
+                                            value={episode.description}
                                             {...register("description")}
                                         />
+                                        <FormLabel>Questões</FormLabel>
+                                        <div className='questions'>
+                                            {tags.map(tag => <div className='tags'>{tag}</div>)}
+                                        </div>
                                     </div>
                                     <div className='choose-color'>
-                                        <h2>Escolha a cor da jornada</h2>
+                                        <h2>Escolha a cor do kit</h2>
                                         <BigHex className={`big-hex ${color}`}/>
-                                        <span className='color-name'>{color.charAt(0).toLocaleUpperCase() + color.slice(1, 10)}</span>
                                         <RadioGroup onChange={setColor} value={color}>
                                             <Stack spacing={0} direction='row' wrap='wrap' className='colors-picker'>
                                                 <Radio 
@@ -218,10 +252,10 @@ const ProjectForm = () => {
                                     {createErrors && <Box color="#dc0362">{createErrors}</Box>}
                                     <Button
                                         onClick={() => {
-                                            setValue('title', show.title, {
+                                            setValue('title', episode.name, {
                                                 shouldTouch: false,
                                             });
-                                            setValue('description', show.description.slice(0, 299), {
+                                            setValue('description', episode.description, {
                                                 shouldTouch: false,
                                             });
                                             
@@ -231,7 +265,7 @@ const ProjectForm = () => {
                                         color='#ffff'
                                         type='submit'
                                     >
-                                        Criar jornada
+                                        Criar kit
                                     </Button>
                             </form>
                         </FormProvider>
@@ -242,4 +276,4 @@ const ProjectForm = () => {
     );
 };
 
-export default ProjectForm;
+export default KitForm;

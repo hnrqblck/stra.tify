@@ -38,7 +38,7 @@ const Home = () => {
                 </aside>
             </div>
 
-            <div id='banner'>
+            <div id='aboutUs'>
                 <Banner />
             </div>
 
