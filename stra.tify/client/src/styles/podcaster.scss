@@ -1,9 +1,7 @@
 #podcaster {
-    // margin-top: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    // align-items: stretch;
 
     main {
         flex: 8;
@@ -37,7 +35,5 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-end;
-
-        // padding: 120px 80px;
     }
 }

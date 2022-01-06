@@ -15,7 +15,6 @@ import RegisterModal from '../components/RegisterModal';
 const Login = () => {
     const { isOpen: isLoginModalOpen, onOpen: onLoginModalOpen, onClose: onLoginModalClose } = useDisclosure();
     const { isOpen: isRegisterModalOpen, onOpen: onRegisterModalOpen, onClose: onRegisterModalClose } = useDisclosure();
-    
 
     return (
         <div id='page-login'>

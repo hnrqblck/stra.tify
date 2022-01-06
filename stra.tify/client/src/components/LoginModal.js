@@ -13,33 +13,25 @@ import {
     Input,
     InputGroup,
     InputRightElement
-  } from '@chakra-ui/react'
-// import { AuthContext } from './providers/auth';
+  } from '@chakra-ui/react';
 import { authenticate } from '../services/requestFunctions';
 import { useForm, FormProvider } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { ReactComponent as StraLogo2 } from '../assets/images/s-1.svg';
 
 const LoginModal = () => {
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
-
     const [loginErrors, setLoginErrors] = React.useState("");
-    // const auth = React.useContext(AuthContext);
     const navigate = useNavigate();
     const {
         handleSubmit,
         register,
-        formState: { errors, isSubmitting },
+        formState: { errors },
     } = useForm();
 
-    // const methods = useForm({
-    //     mode: 'onChange',
-    // });
-
     const handleLogin = (values) => {
-        console.log(values);
         authenticate(values)
         .then((response) => {
             if (response.data) {
@@ -123,8 +115,6 @@ const LoginModal = () => {
                         </form>
                     </FormProvider>
                 </ModalBody>
-
-            
             </ModalContent>
         </>
     )

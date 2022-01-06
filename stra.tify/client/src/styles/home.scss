@@ -46,11 +46,9 @@ body {
     }
     aside {
         flex: 7;
-
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-
         padding: 120px 80px;
 
     }
@@ -62,8 +60,7 @@ body {
     background: #E0F1E2;
 }
 
-#about-us {
-    // margin-top: 50px;
+#footer {
     height: auto;
     background: #E0F1E2;
 }

@@ -12,8 +12,6 @@ body {
 .container-login {
     max-width: 350px;
 	margin: 80px auto 0 auto;
-    
-
 }
 
 .modal-login {
@@ -31,7 +29,6 @@ body {
             align-self: center;
         }
 
-       
     }
 
     label {
@@ -39,7 +36,6 @@ body {
     }
     input {
         background: #ffff;
-        // margin-bottom: 16px;
     }
 
     .forget-password {
@@ -60,7 +56,6 @@ body {
     flex-direction: column;
     align-content: flex-start;
 
-    
     .item-login {
         margin-bottom: 34px;
         flex-grow: 1;
@@ -76,8 +71,6 @@ body {
         height: 50px;
     }        
  }
-    
-
 
 .hex-div{
     position: fixed;

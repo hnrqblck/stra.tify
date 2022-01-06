@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import React,{ useContext, useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from "react";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import PodcastHome from './pages/PodcastHome';
@@ -16,7 +16,6 @@ function App() {
         <Routes>
           <Route exact path="/" element={ <Home />} />
           <Route exact path="/login" element={ <Login />} />
-          {/* <Roexact ute path="/podcast-home/" element={ <PodcastHome />}> */}
           <Route exact path="/podcast-home/" element={ <PodcastHome />}/>
           <Route exact path="/podcasts" element={ <Podcasts />} />
           <Route exact path="/episodios/:id" element={ <PodcastEps />} />

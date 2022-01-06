@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import Header from '../components/Header';
-
 import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-colorido.svg';
 import PodcasterBanner from '../assets/images/podcaster-2.jpg';
 import '../styles/home.scss';
@@ -14,7 +13,7 @@ const Home = () => {
     return (
         <>
             <div id='page-home'>
-                <Header inicio='focus'/>
+                <Header />
                 <main className='container'>
                     <HexagonoColorido className='main-content hidden' />
                     <h1 className='main-content'>Se aproxime de quem te entende.</h1>
@@ -45,7 +44,8 @@ const Home = () => {
             <div id='podcaster'>
                 <Podcaster />
             </div>
-            <div id='about-us'>
+
+            <div id='footer'>
                 <AboutUs />
             </div>
 

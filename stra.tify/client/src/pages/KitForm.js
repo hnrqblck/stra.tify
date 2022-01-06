@@ -10,8 +10,6 @@ import {
     Textarea,
     Select,
     Box,
-    InputGroup, 
-    InputRightElement
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
 import { fetchUserData, createKit, createDivPoint } from '../services/requestFunctions';
@@ -22,30 +20,22 @@ import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg
 import '../styles/kit-form.scss';
 import { getDatabase, ref, onValue, update } from "firebase/database";
 import { app } from '../services/firebase';
-// import Spotify from 'spotify-web-api-js';
-
-
-// const spotifyWebApi = new Spotify();
 
 const KitForm = () => {
     const { showId, epId } = useParams();
-
     const [userData, setUserData] = React.useState({});
     const [createErrors, setCreateErrors] = React.useState("");
-    const [kitId, setKitId] = React.useState('');
-    const [tags, setTags] = React.useState(['O que achou deste episódio?', 'O que você gostaria de ouvir nos próximos encontros?', 'O que você gostaria de indicar?']);
     const [color, setColor] = React.useState('rosa');
     const [show, setShow] = React.useState({});
-    // const [episodeId, setEpisodeId] = React.useState(epId);
     const [episode, setEpisode] = React.useState({});
-    const [projectData, setProjectData] = React.useState({});
+    const [epImage, setEpImage] = React.useState('');
+    const tags = ['O que achou deste episódio?', 'O que você gostaria de ouvir nos próximos encontros?', 'O que você gostaria de indicar?'];
     const navigate = useNavigate();
     const {
         handleSubmit,
         register,
         setValue, 
     } = useForm();
-
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -56,38 +46,22 @@ const KitForm = () => {
             })
         });
         readProjectData(showId, epId);
-        // spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
-        // fetchShow(spotifyWebApi, params.id, setShow);
     }, []);
     
-    // React.useEffect(() => {
-    //     console.log(episodeId)
-        
-    // }, [episodeId]);
-
     function readProjectData(spotifyId, epId) {
         const db = getDatabase(app);
         const readProjectRef = ref(db, 'projects/' + spotifyId);
         onValue(readProjectRef, (snapshot) => {
           const data = snapshot.val();
-        //   console.log(data);
           setShow(data);
         })
         const readEpRef = ref(db, 'projects/' + spotifyId + '/episodes/' + epId);
         onValue(readEpRef, (snapshot) => {
           const data = snapshot.val();
-        //   console.log(data);
           setEpisode(data);
+          setEpImage(data.images[0].url)
         })
-     };
-
-     function updateEpData(spotifyId, epId, pointId) {
-        const db = getDatabase();
-        update(ref(db, 'projects/' + spotifyId + '/episodes/' + epId), {
-            isCreated: true,
-            pointId: pointId, 
-        });
-    }
+     }
 
      function updateProjectData(spotifyId, col, row) {
         const db = getDatabase();
@@ -98,7 +72,14 @@ const KitForm = () => {
             }
         });
     }
-    //  console.log(episode.external_urls.spotify);
+
+     function updateEpData(spotifyId, epId, pointId) {
+        const db = getDatabase();
+        update(ref(db, 'projects/' + spotifyId + '/episodes/' + epId), {
+            isCreated: true,
+            pointId: pointId, 
+        });
+    }
 
     async function handleCreateKit (values) {
         const data = await createKit(localStorage.getItem("Access_Token"), values, episode.name, episode.external_urls.spotify)
@@ -117,8 +98,6 @@ const KitForm = () => {
                 }
                 updateProjectData(showId, col, row)
             });
-            // updateProjectData(showId, epId)
-            // writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
             
         })
         .catch((err) => {
@@ -128,48 +107,11 @@ const KitForm = () => {
                 setCreateErrors(err.message);
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
-        //     const db = getDatabase();
-        //     set(ref(db, 'projects/' + spotifyId), {
-        //         projectId: projectId,
-        //         title: title,
-        //         publisher: publisher,
-        //         cover: cover,
-        //         description: description,
-        //         showId: spotifyId,
-        //         episodes: show.episodes,
-        //     });
-        //   };
-        
     }
     
-
     return (
         <div id='kit-form'>
             <SideNavbar className='sidenav'/>
-
             <div className='main'>
 
                 <section className='above'>
@@ -198,7 +140,7 @@ const KitForm = () => {
                         </form>
                     </FormProvider>
                     <div className='mini-banner'>
-                        {/* <img src={episode.images[1].url}/> */}
+                        <img src={epImage}/>
                         <div className='text'>
                             <h2>{episode.name}</h2>
                             <p>{show.title}</p>
@@ -208,7 +150,6 @@ const KitForm = () => {
                 
                 <section className='form'>
                     <div className='container'>
-                    {/* <h1>Criar Kit {show.title}</h1> */}
                         <FormProvider>
                             <form onSubmit={handleSubmit(handleCreateKit)}>
                                 <FormControl id='project'>

@@ -5,7 +5,6 @@ import { fetchUserData, fetchShow } from '../services/requestFunctions';
 import SideNavbar from '../components/SideNavbar';
 import '../styles/episodes.scss'
 import { useParams, Link} from 'react-router-dom';
-// import { readProjectData } from '../services/firebase';
 import { getDatabase, ref, onValue } from "firebase/database";
 import { app } from '../services/firebase';
 import Spotify from 'spotify-web-api-js';
@@ -57,7 +56,6 @@ const PodcastEps = () => {
         const readProjectRef = ref(db, 'projects/' + spotifyId);
         onValue(readProjectRef, (snapshot) => {
           const data = snapshot.val();
-          console.log(data)
           if (data !== null) setShowDb(true);
           setReadShow(data);
         })

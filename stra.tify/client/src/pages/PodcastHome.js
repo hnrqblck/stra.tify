@@ -2,24 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ArrowRightIcon, ArrowLeftIcon } from '@chakra-ui/icons'
-import { HeadsetIcon, SpotifyIcon } from '../components/CreateIcon';
-import { fetchUserData, fetchMyData } from '../services/requestFunctions';
+import { HeadsetIcon } from '../components/CreateIcon';
+import { fetchUserData } from '../services/requestFunctions';
 import Carousel, { consts } from 'react-elastic-carousel';
 import Item from './Item';
 import SideNavbar from '../components/SideNavbar';
 import '../styles/podcast-home.scss'
 import { getDatabase, ref, onValue } from "firebase/database";
 import { app } from '../services/firebase';
-import Spotify from 'spotify-web-api-js';
-
-const spotifyWebApi = new Spotify();
 
 const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2 },
     { width: 768, itemsToShow: 3 },
     { width: 1200, itemsToShow: 4 },
-]
+];
 
 const myArrow = ({type, onClick, isEdge}) => {
     const pointer = type === consts.PREV ? <ArrowLeftIcon/> : <ArrowRightIcon/>;
@@ -28,13 +25,10 @@ const myArrow = ({type, onClick, isEdge}) => {
           {pointer}
         </Button>
     );
-}
+};
 
 const PodcastHome = () => {
-    
-    const [loggedIn, setLoggedIn] = React.useState(false);
     const [userData, setUserData] = React.useState({});
-    const [spotifyData, setSpotifyData] = React.useState({});
     const [shows, setShows] = React.useState({});
     const [randomShow, setRandomShow] = React.useState({});
 

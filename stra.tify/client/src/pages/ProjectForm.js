@@ -19,8 +19,6 @@ import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg
 import '../styles/project-form.scss';
 import { getDatabase, ref, set, update } from "firebase/database";
 import Spotify from 'spotify-web-api-js';
-// import { set } from 'firebase/database';
-
 
 const spotifyWebApi = new Spotify();
 
@@ -55,17 +53,9 @@ const ProjectForm = () => {
             })
         });
 
-        // const roomRef = database.ref('rooms');
-
-        // roomRef.push(show);
-
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
         fetchShow(spotifyWebApi, params.id, setShow);
     }, []);
-
-    React.useEffect(() => {
-        
-    }, [projectData]);
 
     async function handleCreateProj (values) {
         console.log(values)
@@ -74,15 +64,13 @@ const ProjectForm = () => {
             if (response.data) navigate(`/episodios/${params.id}`);
             updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id)
             createProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
-            .then(resp => updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id))
-            // updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
-            console.log(projectData)
+            .then(resp => updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id));
+
             writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id)
             createMap(localStorage.getItem("Access_Token"), response.data.id)
             .then(response => {
                 updateProjectData(params.id, response.data.id)
             });
-            // createConnectionLink(localStorage.getItem("Access_Token"), response.data.id);
             
         })
         .catch((err) => {
@@ -117,14 +105,12 @@ const ProjectForm = () => {
                 map: maps,
             });
         }
-    
     }
     
 
     return (
         <div id='project-form'>
             <SideNavbar className='sidenav'/>
-
             <div className='main'>
 
                 <section className='above'>

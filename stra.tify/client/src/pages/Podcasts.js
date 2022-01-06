@@ -69,7 +69,7 @@ const Podcasts = () => {
         const search = (JSON.stringify(data.searchContent));
         const slicedSearch = search.slice(0, -1);
         setQuery(slicedSearch.slice(1));
-    }
+    };
 
     return (
         <div id='podcasts-page'>
