@@ -107,7 +107,7 @@ const Podcasts = () => {
                             >
                             Entre com Spotify
                         </Button>
-                    </a>
+                        </a>
                     }
                     
                 </div>

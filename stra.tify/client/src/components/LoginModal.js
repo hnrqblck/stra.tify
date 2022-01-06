@@ -17,7 +17,7 @@ import {
 // import { AuthContext } from './providers/auth';
 import { authenticate } from '../services/requestFunctions';
 import { useForm, FormProvider } from "react-hook-form";
-import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { ReactComponent as StraLogo2 } from '../assets/images/s-1.svg';
 

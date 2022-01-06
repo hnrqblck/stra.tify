@@ -16,7 +16,7 @@ const Home = () => {
             <div id='page-home'>
                 <Header inicio='focus'/>
                 <main className='container'>
-                    <HexagonoColorido className='main-content' />
+                    <HexagonoColorido className='main-content hidden' />
                     <h1 className='main-content'>Se aproxime de quem te entende.</h1>
                     <p className='main-content'>Converse e compartilhe com pessoas que escutam o mesmo que você</p>
                     

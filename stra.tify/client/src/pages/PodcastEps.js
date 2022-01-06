@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '@chakra-ui/react';
+import { SpotifyIcon } from '../components/CreateIcon';
 import { fetchUserData, fetchShow } from '../services/requestFunctions';
 import SideNavbar from '../components/SideNavbar';
 import '../styles/episodes.scss'
@@ -29,6 +30,7 @@ const PodcastEps = () => {
         .then(resp => {
             setUserData({
                 name: resp.name,
+                userId: resp.id
             })
         });
 
@@ -100,7 +102,7 @@ const PodcastEps = () => {
                 <section className='episodes'>
                     <div className='container'>
                         {
-                            (showDb ? readShow : show).episodes.slice(0, 10).map((episode, index) => (
+                            (showDb ? readShow : show).episodes.map((episode, index) => (
                                 
                                 <div key={episode.id}>
                                     <div className='episode'>
@@ -109,8 +111,33 @@ const PodcastEps = () => {
                                             <h2>{episode.name}</h2>
                                             <p>{reformatDate(episode.release_date)} - { msToHMS(episode.duration_ms) }</p>
                                         </div>
+                                        <a href={episode.external_urls.spotify} target='_blank'>
+                                            <Button
+                                                className='spotify-button'
+                                                leftIcon={<SpotifyIcon />}
+                                                bg='#363333'
+                                                color='#ffff'
+                                                borderRadius='100px'
+                                                _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                                >
+                                                Ouvir ep
+                                            </Button>
+                                        </a>
                                         {
                                             (showDb ? 
+                                                episode.isCreated  ? 
+                                                <a href={`https://app.strateegia.digital/journey/${readShow.projectId}/map/${readShow.map}/point/${episode.pointId}`} target='_blank'>
+                                                    <Button
+                                                        className='create-button'
+                                                        bg='#DD76AC'
+                                                        color='#ffff'
+                                                        borderRadius='100px'
+                                                        _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                                    >
+                                                        Ver kit
+                                                    </Button>
+                                                </a> : 
+                                                readShow.createdBy === userData.userId ?
                                                 <Link to={`/create-kit/${readShow.showId}/${index} `}>
                                                     <Button
                                                         className='create-button'
@@ -122,6 +149,7 @@ const PodcastEps = () => {
                                                         Criar kit
                                                     </Button>
                                                 </Link>
+                                                : ''
                                                 : '')
                                         }
                                     </div>

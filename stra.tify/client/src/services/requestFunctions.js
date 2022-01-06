@@ -24,6 +24,21 @@ export const authenticate = async (values) => {
     return functionReturn;
   };
 
+export const signUp = async (values) => {
+    console.log(values);
+    const response = await api('users/v1/user/signup', {
+      method: "POST",
+      data: {
+        email: values.email,
+        name: values.name,
+        password: values.password,
+        term_accepted: values.terms,
+      },
+    });
+    console.log(response)
+    return response
+  };
+
   export const fetchUserData = async (token) => {
     const { data } = await api("/users/v1/user/me", {
       method: "GET",
@@ -147,19 +162,52 @@ export const authenticate = async (values) => {
     return response;
   };
 
-  // export const createConnectionLink = async (token, id) => {
-  //   const response = await api(`/projects/v1/project/${id}/connection-link`, {
-  //     method: "POST",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     data: {
-  //       id: id,
-  //     },
-  //   });
-  //   console.log('CONNECTION LINK:' + response);
-  //   return response;
-  // };
+  export const createProjectInvite = async (token, id) => {
+    const response = await api(`/projects/v1/project/${id}/invite`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        approve_all: true,
+      }
+    });
+    console.log(response);
+    return response;
+  };
+
+  export const updateProjectInvite = async (token, id) => {
+    const response = await api(`/projects/v1/project/${id}/invite`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        approve_all: true,
+      }
+    });
+    console.log(response);
+    return response;
+  };
+
+  
+
+  
+
+  export const createConnectionLink = async (token, id) => {
+    const response = await api(`/projects/v1/project/${id}/connection-link`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        title: 'oi',
+        url: 'https://app.strateegia.digital/dashboard/public-link/AApejT'
+      },
+    });
+    console.log(response);
+    return response;
+  };
 
 
 

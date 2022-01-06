@@ -20,7 +20,7 @@ import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
 import { ReactComponent as SmallHex } from '../assets/images/smhex-formcolor.svg';
 import '../styles/kit-form.scss';
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 import { app } from '../services/firebase';
 // import Spotify from 'spotify-web-api-js';
 
@@ -80,14 +80,44 @@ const KitForm = () => {
           setEpisode(data);
         })
      };
+
+     function updateEpData(spotifyId, epId, pointId) {
+        const db = getDatabase();
+        update(ref(db, 'projects/' + spotifyId + '/episodes/' + epId), {
+            isCreated: true,
+            pointId: pointId, 
+        });
+    }
+
+     function updateProjectData(spotifyId, col, row) {
+        const db = getDatabase();
+        update(ref(db, 'projects/' + spotifyId ), {
+            kitsPosition: {
+                col: col,
+                row: row,
+            }
+        });
+    }
     //  console.log(episode.external_urls.spotify);
 
     async function handleCreateKit (values) {
-        // console.log(values);
         const data = await createKit(localStorage.getItem("Access_Token"), values, episode.name, episode.external_urls.spotify)
         .then((response) => {
             if (response.data) navigate(`/episodios/${showId}`);
-            createDivPoint(localStorage.getItem("Access_Token"), show.map, 0, 1, response.data.id)
+            createDivPoint(localStorage.getItem("Access_Token"), show.map, show.kitsPosition.col, show.kitsPosition.row, response.data.id)
+            .then(resp => {
+                updateEpData(showId, epId, resp.data.id);
+                let col = show.kitsPosition.col;
+                let row = show.kitsPosition.row;
+                if (row < 4) {
+                    row = row + 1;
+                } else {
+                    row = 0;
+                    col = col + 1;
+                }
+                updateProjectData(showId, col, row)
+            });
+            // updateProjectData(showId, epId)
             // writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
             
         })
@@ -98,6 +128,27 @@ const KitForm = () => {
                 setCreateErrors(err.message);
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
         //     const db = getDatabase();
@@ -229,12 +280,12 @@ const KitForm = () => {
                                                     <SmallHex className='MAGENTA'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='GREEN'
+                                                    value='TEAL'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='GREEN'/>
+                                                    <SmallHex className='TEAL'/>
                                                 </Radio>
                                                 <Radio
                                                     value='PINK'
@@ -255,7 +306,7 @@ const KitForm = () => {
                                             setValue('title', episode.name, {
                                                 shouldTouch: false,
                                             });
-                                            setValue('description', episode.description, {
+                                            setValue('description', episode.description.slice(1, 999), {
                                                 shouldTouch: false,
                                             });
                                             

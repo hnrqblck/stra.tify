@@ -46,6 +46,7 @@
             .container {
                 display: flex;
                 align-items: center;
+                height: 360px;
                 
                 .pod-img {
                     filter:  drop-shadow(0px 27.4338px 15.375px rgba(0, 0, 0, 0.130318)) drop-shadow(0px 17.581px 9.85311px rgba(0, 0, 0, 0.114179)) drop-shadow(0px 11.3946px 6.38599px rgba(0, 0, 0, 0.1)) drop-shadow(0px 7.17278px 4.01991px rgba(0, 0, 0, 0.0858211)) drop-shadow(0px 4.12121px 2.30969px rgba(0, 0, 0, 0.0696822)) drop-shadow(0px 1.81385px 1.01655px rgba(0, 0, 0, 0.0479335));
@@ -75,11 +76,19 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-
+            height: auto;
+            
+            .container {
+                max-height: 410px;
+                overflow-y: scroll;
+                margin-bottom: 0 !important;
+            }
+            
             .episode {
                 display: flex;
                 flex-direction: row;
                 margin-bottom: 24px;
+                align-items: center;
 
                 
                 img {
@@ -87,13 +96,17 @@
                     max-width: 126px;
                     border-radius: 10px;
                 }
+
+                a {
+                    margin-right: 10px;
+                }
                 
                 .ep-description {
-                    width: 390px;
+                    width: 380px;
                     align-self: flex-end;
                     font-size: 20px;
                     color: rgba(97, 97, 97, 1);
-                    margin-right: 100px;
+                    margin-right: 10px;
                     
                     h2 {
                         color: black;
@@ -117,16 +130,16 @@
     
 }
 
-.divider {
-    &::after {               
-        content: '';
-        display: block;
-        position: absolute;
-        height: 1px;
-        background: white;
-        width: 67.7%;
-        left: 25%;
-        margin: -12px
+// .divider {
+//     &::after {               
+//         content: '';
+//         display: block;
+//         position: absolute;
+//         height: 1px;
+//         background: white;
+//         width: 67.7%;
+//         left: 25%;
+//         margin: -12px
     
-    }
-}
+//     }
+// }

@@ -11,7 +11,7 @@ import {
     Box
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
-import { fetchUserData, fetchShow, createProject, updateProjectInfo, createMap } from '../services/requestFunctions';
+import { fetchUserData, fetchShow, createProject, updateProjectInfo, createMap, createConnectionLink, createProjectInvite, updateProjectInvite } from '../services/requestFunctions';
 import { useForm, FormProvider } from "react-hook-form";
 import { useParams, useNavigate} from 'react-router-dom';
 import { ReactComponent as BigHex } from '../assets/images/bighex-formcolor.svg';
@@ -68,17 +68,21 @@ const ProjectForm = () => {
     }, [projectData]);
 
     async function handleCreateProj (values) {
+        console.log(values)
         const data = await createProject(localStorage.getItem("Access_Token"), values, userData.userId)
         .then((response) => {
-            console.log(response.data.maps)
             if (response.data) navigate(`/episodios/${params.id}`);
-            updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id);
+            updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id)
+            createProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
+            .then(resp => updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id))
+            // updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
             console.log(projectData)
-            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description)
+            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id)
             createMap(localStorage.getItem("Access_Token"), response.data.id)
             .then(response => {
                 updateProjectData(params.id, response.data.id)
-            })
+            });
+            // createConnectionLink(localStorage.getItem("Access_Token"), response.data.id);
             
         })
         .catch((err) => {
@@ -89,7 +93,7 @@ const ProjectForm = () => {
             }
         });
 
-        function writeProjectData(spotifyId, projectId, title, publisher, cover, description) {
+        function writeProjectData(spotifyId, projectId, title, publisher, cover, description, user) {
             const db = getDatabase();
             set(ref(db, 'projects/' + spotifyId), {
                 projectId: projectId,
@@ -99,6 +103,11 @@ const ProjectForm = () => {
                 description: description,
                 showId: spotifyId,
                 episodes: show.episodes,
+                kitsPosition: {
+                    col: 0,
+                    row: 0,
+                },
+                createdBy: user,
             });
         }
 
@@ -151,7 +160,6 @@ const ProjectForm = () => {
                                     <div className='choose-color'>
                                         <h2>Escolha a cor da jornada</h2>
                                         <BigHex className={`big-hex ${color}`}/>
-                                        <span className='color-name'>{color.charAt(0).toLocaleUpperCase() + color.slice(1, 10)}</span>
                                         <RadioGroup onChange={setColor} value={color}>
                                             <Stack spacing={0} direction='row' wrap='wrap' className='colors-picker'>
                                                 <Radio 
@@ -195,12 +203,12 @@ const ProjectForm = () => {
                                                     <SmallHex className='MAGENTA'/>
                                                 </Radio>
                                                 <Radio
-                                                    value='GREEN'
+                                                    value='TEAL'
                                                     {...register("color", {
                                                         required: "campo obrigatório *",
                                                     })}
                                                 >
-                                                    <SmallHex className='GREEN'/>
+                                                    <SmallHex className='TEAL'/>
                                                 </Radio>
                                                 <Radio
                                                     value='PINK'

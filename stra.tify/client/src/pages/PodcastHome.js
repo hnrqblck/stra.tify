@@ -91,9 +91,10 @@ const PodcastHome = () => {
                             <Link to={'/episodios/' + randomShow.showId}>  
                                 <Button 
                                     className='main-button'
-                                    bg='#C4C4C4'
-                                    color='#ffff'
+                                    variant='outline'
                                     borderRadius='100px'
+                                    borderColor='#EC2390'
+                                    color='#EC2390'
                                     _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
                                     >
                                     Ver episódios

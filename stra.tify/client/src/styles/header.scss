@@ -2,7 +2,7 @@ $pink-1: #EC2390;
 
 .header {
     padding: 0.5rem 0;
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 100;
     background-color: #ffff;
@@ -13,8 +13,8 @@ $pink-1: #EC2390;
         justify-content: space-around;
         align-items: center;
         font-size: 20px;
-        padding: 64px 0;
-        height: 8rem;
+        padding: 50px 0;
+        height: 6rem;
 
         a:hover {
             color: $pink-1;
