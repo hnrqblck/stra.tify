@@ -1,0 +1,264 @@
+@media only screen and (min-width: 1400px){
+    
+    // -------------- HOME - PODCASTER SECTION 
+    
+    #podcaster {
+       width: 100%;
+       .container {
+           margin-left: 150px;
+           padding-left: 0;
+
+           p {
+                width: 500px;
+           }
+       }
+       aside.container {
+           margin-right: 280px;
+       }
+    }
+
+    // ------------------------------LOGIN & MODALS
+
+    #page-login {
+        .container-login {
+            margin-top: 350px;
+    
+        }
+
+    }
+
+    .chakra-modal__content-container  {
+        top: 100px !important;
+    }
+
+    // ----------------SIDE NAV BAR
+
+    #side-navbar {
+        .podcasts {
+            margin-top: 20px;
+            margin-bottom: 400px !important;
+        }
+
+        .css-1dsb314 {
+            height: 100vh;
+        }
+    }
+
+    // ---------------- PODCAST EPS
+
+    #podcast-home--page {
+        .podcast {
+
+            .container {
+                min-width: 1080px;
+
+                img {
+                    margin-right: 30px;
+                }
+            }
+        }
+
+        .episodes {
+
+            .container {
+                max-height: 500px !important;
+            }
+
+            .episode {
+            
+                .ep-description {
+                    width: 600px !important;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+
+    // ---------------- KIT FORM
+    
+    #kit-form {
+        .form {
+            margin-left: 100px;
+
+            input, .questions {
+                width: 600px !important;
+            }
+
+            .choose-color {
+
+                .colors-picker {
+                    margin-top: 20px;
+                    max-width: 300px !important;
+                }
+            }
+        }
+        .details-form {
+            width: 650px !important;
+            margin-left: 135px;
+        }
+
+        .mini-banner {
+            .text {
+                width: 250px !important;
+            }
+        }
+
+    }
+
+        // ---------------- PROJECT FORM
+
+        #project-form {
+
+            .form {
+                margin-left: 100px;
+
+                input {
+                    width: 600px !important;
+                }
+
+                .choose-color {
+    
+                    .colors-picker {
+                        margin-top: 20px;
+                        max-width: 300px !important;
+                    }
+                }
+            }
+        }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1200px) {
+    // ---------------- HEADER
+    .header {
+        width: 100%;
+
+        .logo {
+            margin-right: 23rem !important;
+        }
+    }
+
+    // -------------- HOME 
+    
+    #page-home {
+
+        .main-content {
+            margin: 20px !important;
+        }
+
+        h1.main-content {
+            font-size: 65px;
+        }
+
+        .main-button {
+            margin: 20px !important;
+        }
+
+    }
+    
+    #podcaster {
+        main.container {
+            padding: 150px 150px 0 25px !important; 
+
+            h1 {
+                font-size: 45px;
+            }
+
+            p {
+                width: auto;
+            }
+        }
+        
+    }
+
+    // ------------------------------LOGIN & MODALS
+
+    #page-login {
+
+        .hex-div {
+            left: 80% !important;
+        }
+    }
+
+    // ---------------- PODCAST EPS 
+
+    #podcast-home--page {
+        .podcast .container {
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            .container-img {
+                margin-bottom: 20px;
+                // width: auto;
+            }
+
+            .podcast-details {
+                text-align: center;
+            }
+        }
+        .episode {
+            
+            .ep-description {
+                width: 200px !important;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    // ---------------- KIT FORM
+    #kit-form {
+        .form {
+
+            .container {
+                margin-left: 0 !important;
+            }
+
+            .form-container {
+                justify-content: flex-start !important;
+            }
+
+            input, .questions {
+                max-width: 300px !important;
+            }
+
+        }
+
+        .details-form {
+            flex-direction: column;
+            width: 300px !important;
+            
+            .css-k7r2wc {
+                margin-bottom: 10px;
+            }
+
+        }
+
+        .mini-banner {
+            img{
+                height: 130px ;
+                width: 130px !important;
+            }
+
+            .text {
+                justify-content: center;
+            }
+        }
+    }
+
+    // ---------------- PROJECT FORM
+
+    #project-form {
+        .form {
+
+
+            .form-container {
+                justify-content: flex-start !important;
+            }
+
+            input {
+                max-width: 350px !important;
+            }
+
+        }
+    }
+
+}

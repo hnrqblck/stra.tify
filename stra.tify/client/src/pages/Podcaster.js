@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
 import { ReactComponent as HexPodcaster } from '../assets/images/hex-podcaster.svg';
 import '../styles/podcaster.scss';
+import '../styles/responsive.scss';
 
 const Podcaster = () => {
     return (

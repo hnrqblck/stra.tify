@@ -31,6 +31,7 @@ const PodcastHome = () => {
     const [userData, setUserData] = React.useState({});
     const [shows, setShows] = React.useState({});
     const [randomShow, setRandomShow] = React.useState({});
+    
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -75,20 +76,19 @@ const PodcastHome = () => {
                     </div>
                     
                     <div className='container'>
-                        <div >
+                        <div className='container-img'>
                             <img src={randomShow.cover} alt={`Capa ${randomShow.title}`} className='main-img'/>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>
                             <h1>{randomShow.title}</h1>
-                            <p>Entre agora na jornada e discuta os episódios</p>
+                            <p>Agora tem um espaço para você. Faça parte dessa troca. </p>
                             <Link to={'/episodios/' + randomShow.showId}>  
                                 <Button 
                                     className='main-button'
-                                    variant='outline'
                                     borderRadius='100px'
-                                    borderColor='#EC2390'
-                                    color='#EC2390'
+                                    backgroundColor='#E73794'
+                                    color='white'
                                     _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
                                     >
                                     Ver episódios

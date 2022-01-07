@@ -35,6 +35,10 @@ $rosa: #EC2390;
             align-self: stretch;
             border-radius: 10px;
 
+            .big-hex path{
+                fill: #bebebe;
+            }
+
             #selected {
                 stroke-width: 2px !important;
             }
@@ -182,6 +186,8 @@ $rosa: #EC2390;
 
                     .colors-picker {
                         max-width: 240px;
+                        padding-right: 24px;
+                        justify-content: center;
                     }   
                 }
             }

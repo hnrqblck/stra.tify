@@ -2,10 +2,10 @@ import React from 'react';
 import { Flex, Spacer, Center } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-colorido.svg';
-import { ReactComponent as HexIcon } from '../assets/images/hexIcon.svg'
-import { HomeIcon, AccountIcon, ExitIcon } from './CreateIcon';
+import { HomeIcon, AccountIcon, ExitIcon, HexIcon } from './CreateIcon';
 import { SettingsIcon } from '@chakra-ui/icons'
 import '../styles/sidenavbar.scss';
+import '../styles/responsive.scss';
 
 function logOff() {
     localStorage.removeItem('Access_Token');
@@ -19,23 +19,23 @@ const SideNavbar = (props) => {
                 <HexagonoColorido className='hex'/>
                 
                 <nav className='container'>
-                    <div>
+                    <div className='hover'>
                         <Link className={props.podcastHome} to="/podcast-home/">  
                             <HomeIcon boxSize={30} />
                             <span>Início</span>
                         </Link>
                     </div>
-                    <div className='podcasts'>
+                    <div className='podcasts hover' >
                         <Link className={props.podcasts} to="/podcasts"> 
-                            <HexIcon/>
+                            <HexIcon boxSize={30}/>
                             <span>Podcasts</span>
                         </Link>
                     </div>
-                    <div>
+                    {/* <div>
                         <SettingsIcon w={30} h={30}/>
                         <span>Configurações</span>
-                    </div>
-                    <div>
+                    </div> */}
+                    <div className='hover'>
                         <Link className={props.home} to="/" onClick={logOff}>
                             <ExitIcon boxSize={30} />
                             <span>Sair</span>

@@ -9,6 +9,7 @@ import {
 import { ReactComponent as StraLogo } from '../assets/images/strateegiaLogo.svg';
 import { ReactComponent as HexBottom } from '../assets/images/hexagono-bottom.svg';
 import '../styles/login.scss'
+import '../styles/responsive.scss';
 import LoginModal from '../components/LoginModal';
 import RegisterModal from '../components/RegisterModal';
 

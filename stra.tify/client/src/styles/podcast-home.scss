@@ -5,10 +5,15 @@
         flex: 1;
     }
 
+    .rec-carousel-item {
+        margin-right: 10px !important;
+    }
+
     .main {
         .container {
             background: #B7ECBC;
             width: auto;
+            // height: auto !important;
             padding: 40px 40px;
             margin: 0 0 24px 40px;
             align-self: stretch;

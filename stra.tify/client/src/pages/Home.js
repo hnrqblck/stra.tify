@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-colorido.svg';
 import PodcasterBanner from '../assets/images/podcaster-2.jpg';
 import '../styles/home.scss';
+// import '../styles/responsive.scss';
 import Banner from './Banner';
 import Podcaster from './Podcaster';
 import AboutUs from './AboutUs';

@@ -79,7 +79,8 @@ const PodcastEps = () => {
                         <div className='podcast-details'>
                             <p>Podcast</p>
                             <h1>{ showDb ? readShow.title : show.title}</h1>
-                            <p>{ showDb ? readShow.publisher : show.publisher}</p>
+                            {/* <p>{ showDb ? readShow.publisher : show.publisher}</p> */}
+                            <p>{showDb ? 'Faça parte de um grupo de discussão. Se aproxime de quem te entende.' : 'Crie um espaço para discussão. Se aproxime de quem te entende.'}</p>
                             {showDb ? '' :
                                 <Link to={`/create-project/${params.id}`}>
                                 <Button
@@ -104,53 +105,57 @@ const PodcastEps = () => {
                                 
                                 <div key={episode.id}>
                                     <div className='episode'>
-                                        <img src={episode.images[0].url} />
-                                        <div className='ep-description'>
-                                            <h2>{episode.name}</h2>
-                                            <p>{reformatDate(episode.release_date)} - { msToHMS(episode.duration_ms) }</p>
+                                        <div className='img-desc'>
+                                            <img src={episode.images[0].url} />
+                                            <div className='ep-description'>
+                                                <h2>{episode.name}</h2>
+                                                <p>{reformatDate(episode.release_date)} - { msToHMS(episode.duration_ms) }</p>
+                                            </div>
                                         </div>
-                                        <a href={episode.external_urls.spotify} target='_blank'>
-                                            <Button
-                                                className='spotify-button'
-                                                leftIcon={<SpotifyIcon />}
-                                                bg='#363333'
-                                                color='#ffff'
-                                                borderRadius='100px'
-                                                _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
-                                                >
-                                                Ouvir ep
-                                            </Button>
-                                        </a>
-                                        {
-                                            (showDb ? 
-                                                episode.isCreated  ? 
-                                                <a href={`https://app.strateegia.digital/journey/${readShow.projectId}/map/${readShow.map}/point/${episode.pointId}`} target='_blank'>
-                                                    <Button
-                                                        className='create-button'
-                                                        bg='#DD76AC'
-                                                        color='#ffff'
-                                                        borderRadius='100px'
-                                                        _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                        <div>
+                                            <a href={episode.external_urls.spotify} target='_blank'>
+                                                <Button
+                                                    className='spotify-button'
+                                                    leftIcon={<SpotifyIcon />}
+                                                    bg='#363333'
+                                                    color='#ffff'
+                                                    borderRadius='100px'
+                                                    _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
                                                     >
-                                                        Ver kit
-                                                    </Button>
-                                                </a> : 
-                                                readShow.createdBy === userData.userId ?
-                                                <Link to={`/create-kit/${readShow.showId}/${index} `}>
-                                                    <Button
-                                                        className='create-button'
-                                                        bg='#2CD648'
-                                                        color='#ffff'
-                                                        borderRadius='100px'
-                                                        _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
-                                                    >
-                                                        Criar kit
-                                                    </Button>
-                                                </Link>
-                                                : ''
-                                                : '')
-                                        }
-                                    </div>
+                                                    Ouvir ep
+                                                </Button>
+                                            </a>
+                                            {
+                                                (showDb ? 
+                                                    episode.isCreated  ? 
+                                                    <a href={`https://app.strateegia.digital/journey/${readShow.projectId}/map/${readShow.map}/point/${episode.pointId}`} target='_blank'>
+                                                        <Button
+                                                            className='create-button'
+                                                            bg='#DD76AC'
+                                                            color='#ffff'
+                                                            borderRadius='100px'
+                                                            _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                                        >
+                                                            Ver kit
+                                                        </Button>
+                                                    </a> : 
+                                                    readShow.createdBy === userData.userId ?
+                                                    <Link to={`/create-kit/${readShow.showId}/${index} `}>
+                                                        <Button
+                                                            className='create-button'
+                                                            bg='#2CD648'
+                                                            color='#ffff'
+                                                            borderRadius='100px'
+                                                            _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                                        >
+                                                            Criar kit
+                                                        </Button>
+                                                    </Link>
+                                                    : ''
+                                                    : '')
+                                            }
+                                        </div>
+                                        </div>
                                     <div className='divider'></div>
                                 </div>
                             ))

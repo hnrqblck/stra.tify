@@ -1,9 +1,15 @@
 body {
     padding-top: 0;
-    
+
     #side-navbar {
         display: flex;
         align-items: flex-start;
+        margin-right: 276px;
+        
+        .css-1dsb314 {
+            position: fixed;
+            height: 100vh;
+        }
 
         div:first-child {
             align-items: flex-start;
@@ -27,7 +33,7 @@ body {
 
                 .podcasts {
                     display: flex;
-                    margin-bottom: 256px;
+                    margin-bottom: 100px;
                     flex-grow: 2;
                     flex-direction: row;
                     flex-wrap: nowrap;
@@ -49,6 +55,16 @@ body {
                     padding-left: 8px;
 
                 }
+                .hover:hover {
+                    color: #EC2390;
+                    // transition: 100ms;
+                    font-weight: 550;
+                    
+                    path {
+                        fill: #EC2390;
+                    }
+                    }
+                
             }
         }
     }
