@@ -96,7 +96,7 @@ const Podcasts = () => {
                     ? 
                         <img src={spotifyData.img} className='spotify-img'/> 
                     :
-                        <a href='http://localhost:8888/'>
+                        <a href='https://stratify-spotify.herokuapp.com/'>
                         <Button
                             className='spotify-button'
                             leftIcon={<SpotifyIcon />}
