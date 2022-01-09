@@ -257,7 +257,7 @@ const KitForm = () => {
                                         color='#ffff'
                                         type='submit'
                                     >
-                                        Criar kit
+                                        Criar
                                     </Button>
                             </form>
                         </FormProvider>

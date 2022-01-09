@@ -262,3 +262,266 @@
     }
 
 }
+
+@media only screen and (max-width: 899px) {
+    // ---------------- HEADER
+    .header {
+        .menu {
+            font-size: 25px;
+            // width: 700px !important;
+
+            .css-v70bbl {
+                font-size: 15px !important;
+                height: 30px;
+                width: 100px;
+            }
+        }
+        .logo {
+            font-size: 35px !important;
+            margin: 0 !important;
+        }   
+    }
+
+    // ---------------- HOME
+    #page-home {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+
+        main {
+            align-items: center;
+
+            .main-content {
+                margin: 20px 0 !important;
+                text-align: center;
+            }
+            h1 {
+                font-size: 80px;
+                line-height: 96px;
+                width: auto;
+            }
+        }
+    }
+
+    #podcaster {
+        flex-direction: column;
+        main.container {
+            padding: 150px 0 0 0;
+        }
+    }
+
+    #aboutUs {
+        h1 {
+            width: 100%;
+        }
+        .description {
+            width: 60% !important;
+        }
+        .cards {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    #page--about-us {
+        .container {
+            flex-direction: column !important;
+            height: 500px !important;
+        }
+        
+    } 
+
+    // -------------- PAGE LOGIN
+
+    #page-login {
+
+        .hex-div {
+            left: 70% !important;
+        }
+    }
+
+    // --------------- SIDE NAV BAR
+
+    #side-navbar {
+        display: flex;
+        align-items: flex-start;
+        margin-right: 0 !important;
+        z-index: 100;
+
+        div:first-child {
+            border-radius: 0 !important;
+            justify-content: center !important;
+        }
+
+        .hex{
+            margin: 0 !important;
+            visibility: hidden;
+            height: 0 !important;
+        }
+        
+        .css-1dsb314 {
+            position: fixed;
+            height: 15vh !important;
+            margin-top: 85vh;
+            width: 100VW;
+        }
+
+        nav.container {
+            width: 100vw;
+            flex-direction: row !important;
+            justify-content: space-around;
+            margin-left: 0 !important;
+
+
+
+            svg {
+                width: 35px !important;
+                height: 35px !important;
+            }
+
+            span {
+                font-size: 25px;
+                align-self: center;
+            }
+
+            .podcasts {
+                flex-grow: 0 !important;
+                margin-bottom: 0 !important;
+                
+            }
+        }
+    }
+
+    #podcast-home--page {
+        margin-bottom: 180px;
+        width: 90vw;
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+        }
+        .podcast .container {
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 500px !important;
+            min-width: 470px;
+            
+            .container-img {
+                margin-bottom: 20px;
+            }
+
+            .podcast-details {
+                text-align: center;
+            }
+        }
+
+        .podcasts-recentes {
+            .container {
+                min-width: 500px !important;
+            }
+        }
+
+        .episode {
+            
+            .ep-description {
+                width: 180px !important;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    // ------------------KIT FORM
+
+    #kit-form {
+        .main {
+            width: 100vw;
+
+            .above {
+                width: 85vw !important;
+            }
+        }
+        .form {
+            .container {
+                margin: 0 !important;
+                align-items: center;
+
+                button {
+                    width: 400px !important;
+                    margin-bottom: 120px;
+                }
+            }
+
+            input, .questions, textarea {
+                width: 400px !important;
+            }
+            .form-container {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 40px;
+
+                .choose-color {
+                    margin: 0 0 0 0 !important;
+                }
+            }
+        }
+
+        .details-form {
+            flex-direction: column;
+            width: 300px !important;
+            
+            .css-k7r2wc {
+                margin-bottom: 10px;
+            }
+
+        }
+        .details-header {
+            flex-direction: column;
+            align-items: center;
+            
+            .mini-banner {
+                img{
+                    height: 130px ;
+                    width: 130px !important;
+                }
+    
+                .text {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    // ---------------- PROJECT FORM
+
+    #project-form {
+        flex-direction: column;
+        .form {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                margin: 0 !important;
+
+                button {
+                    width: 400px !important;
+                    margin-bottom: 120px;
+                }
+            }
+
+            .form-container {
+                flex-direction: column;
+                align-items: center;
+
+                .choose-color {
+                    margin: 20px 0 0 0 !important;
+                }
+            }
+
+            input, textarea {
+                max-width: 400px !important;
+            }
+
+        }
+    }
+}

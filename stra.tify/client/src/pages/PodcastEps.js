@@ -136,7 +136,7 @@ const PodcastEps = () => {
                                                             borderRadius='100px'
                                                             _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
                                                         >
-                                                            Ver kit
+                                                            Participar
                                                         </Button>
                                                     </a> : 
                                                     readShow.createdBy === userData.userId ?
@@ -148,7 +148,7 @@ const PodcastEps = () => {
                                                             borderRadius='100px'
                                                             _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
                                                         >
-                                                            Criar kit
+                                                            Criar agora
                                                         </Button>
                                                     </Link>
                                                     : ''

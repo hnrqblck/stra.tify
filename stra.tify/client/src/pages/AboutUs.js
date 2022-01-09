@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkedinIcon } from '../components/CreateIcon';
 import '../styles/about-us.scss';
+import '../styles/responsive.scss';
 
 const AboutUs = () => {
     return (
