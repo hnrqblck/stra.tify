@@ -97,16 +97,16 @@ const Podcasts = () => {
                         <img src={spotifyData.img} className='spotify-img'/> 
                     :
                         <a href='https://stratify-spotify.herokuapp.com/'>
-                        <Button
-                            className='spotify-button'
-                            leftIcon={<SpotifyIcon />}
-                            bg='#363333'
-                            color='#ffff'
-                            borderRadius='100px'
-                            _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
-                            >
-                            Entre com Spotify
-                        </Button>
+                            <Button
+                                className='spotify-button'
+                                leftIcon={<SpotifyIcon />}
+                                bg='#363333'
+                                color='#ffff'
+                                borderRadius='100px'
+                                _hover={{ boxShadow: '0 2px 2px rgba(0, 0, 0, .30)', transition: '200ms ease' }}
+                                >
+                                Entre com Spotify
+                            </Button>
                         </a>
                     }
                     
