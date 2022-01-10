@@ -12,7 +12,7 @@ const Banner = () => {
             <section className='cards'>
                 <div>
                     <img src={Lightbulb} alt='Lâmpada'/>
-                    <p>Dê a sua sugestão para os podcaster</p>
+                    <p>Dê a sua sugestão para os podcasters</p>
                 </div>
                 <div>
                     <img src={SpeechBalloon} alt='Balões de conversação'/>
