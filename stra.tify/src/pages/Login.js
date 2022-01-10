@@ -48,9 +48,9 @@ const Login = () => {
                 <Modal isOpen={isLoginModalOpen} onClose={onLoginModalClose} size={'xl'} bg='blue'>
                     <LoginModal/>
                 </Modal>
-                <Modal isOpen={isRegisterModalOpen} onClose={onRegisterModalClose} size={'xl'} bg='blue' initialFocusRef={initialRef} finalFocusRef={finalRef}>
-                    <RegisterModal />
-                </Modal>
+                {/* <Modal isOpen={isRegisterModalOpen} onClose={onRegisterModalClose} size={'xl'} bg='blue' initialFocusRef={initialRef} finalFocusRef={finalRef}> */}
+                    <RegisterModal isOpen={isRegisterModalOpen} onClose={onRegisterModalClose} initialFocusRef={initialRef} finalFocusRef={finalRef}/>
+                {/* </Modal> */}
             </section>
             <div className='hex-div'>
                 <HexBottom className='hex-bottom'/>

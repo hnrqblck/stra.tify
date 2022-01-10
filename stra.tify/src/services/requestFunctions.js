@@ -25,7 +25,6 @@ export const authenticate = async (values) => {
   };
 
 export const signUp = async (values) => {
-    console.log(values);
     const response = await api('users/v1/user/signup', {
       method: "POST",
       data: {
@@ -35,7 +34,6 @@ export const signUp = async (values) => {
         term_accepted: values.terms,
       },
     });
-    console.log(response)
     return response
   };
 
@@ -141,7 +139,6 @@ export const signUp = async (values) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
     return data;
   };
 
@@ -158,7 +155,6 @@ export const signUp = async (values) => {
         visibility: 'PUBLIC',
       },
     });
-    console.log(response);
     return response;
   };
 
@@ -172,7 +168,6 @@ export const signUp = async (values) => {
         approve_all: true,
       }
     });
-    console.log(response);
     return response;
   };
 
@@ -186,7 +181,6 @@ export const signUp = async (values) => {
         approve_all: true,
       }
     });
-    console.log(response);
     return response;
   };
 
@@ -205,7 +199,6 @@ export const signUp = async (values) => {
         url: 'https://app.strateegia.digital/dashboard/public-link/AApejT'
       },
     });
-    console.log(response);
     return response;
   };
 
