@@ -1,5 +1,11 @@
 @media only screen and (min-width: 1400px){
     
+    // ---------------- HEADER
+    .header nav.container {
+        max-width: 100vw !important;
+        }
+    }
+
     // -------------- HOME - PODCASTER SECTION 
     
     #podcaster {
@@ -125,7 +131,7 @@
                 }
             }
         }
-}
+
 
 @media only screen and (min-width: 900px) and (max-width: 1200px) {
     // ---------------- HEADER
@@ -133,7 +139,16 @@
         width: 100%;
 
         .logo {
-            margin-right: 23rem !important;
+            // margin-right: 23rem !important;
+            margin: 0 23rem 0 1.5rem !important;
+            
+            img {
+                margin-right: 1.5rem;
+            }
+        }
+
+        .menu {
+            margin-right: 0 !important;
         }
     }
 
@@ -263,7 +278,7 @@
 
 }
 
-@media only screen and (max-width: 899px) {
+@media only screen and (min-width: 651px) and (max-width: 899px) {
     // ---------------- HEADER
     .header {
         .menu {
@@ -278,8 +293,16 @@
         }
         .logo {
             font-size: 35px !important;
-            margin: 0 !important;
+            margin: 0 0 0 1rem !important;
+            width: 120px;
+            img {
+                margin-right: 1rem;
+            }
         }   
+
+        .menu {
+            margin-right: 0 !important;
+        }
     }
 
     // ---------------- HOME
@@ -289,7 +312,7 @@
         width: 100vw;
 
         main {
-            align-items: center;
+            align-items: center !important;
 
             .main-content {
                 margin: 20px 0 !important;
@@ -524,4 +547,96 @@
 
         }
     }
+}
+
+@media only screen and (max-width: 650px) {
+      // ---------------- HEADER
+      .header {
+        .menu {
+            font-size: 15px;
+            // width: 700px !important;
+
+            .css-v70bbl {
+                font-size: 15px !important;
+                height: 30px;
+                width: 100px;
+            }
+        }
+        .logo {
+            justify-content: flex-start;
+            font-size: 20px !important;
+            margin: 0 0 0 1rem !important;
+            width: 120px;
+            img {
+                margin-right: 0.5rem;
+                width: 35px !important;
+            }
+        }   
+
+        .menu {
+            margin-right: 0 !important;
+        }
+    }
+
+    // ---------------- HOME
+    #page-home {
+        display: flex;
+        flex-direction: column !important;
+        
+        main {
+            max-width: 100vw !important;
+            align-items: center !important;
+
+            .main-content {
+                margin: 20px 0 !important;
+                text-align: center;
+            }
+            h1 {
+                font-size: 60px !important;
+                line-height: 65px !important;
+                width: auto;
+
+                button {
+                    margin: 0px !important;
+                }
+            }
+        }
+    }
+
+    #podcaster {
+        flex-direction: column !important;
+        width: 100vw;
+        main.container {
+            padding: 55px 0 0 0;
+        }
+
+        .container {
+            margin: 0 0 0 10px!important;
+
+            p {
+                width: 350px;
+            }
+        }
+    }
+
+    #aboutUs {
+        h1 {
+            width: 100%;
+        }
+        .description {
+            width: 60% !important;
+        }
+        .cards {
+            flex-direction: column !important;
+            align-items: center;
+        }
+    }
+
+    #page--about-us {
+        .container {
+            flex-direction: column !important;
+            height: 500px !important;
+        }
+        
+    } 
 }

@@ -4,6 +4,7 @@ import { Button } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import Logo from '../assets/images/logo.png';
 import '../styles/header.scss';
+import '../styles/responsive.scss';
 
 const Header = (props) => {
 
