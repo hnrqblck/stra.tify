@@ -24,6 +24,14 @@ $pink-1: #EC2390;
         .logo {
             font-size: 30px;
             margin-right: 40rem;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            img {
+                width: 60px;
+            }
         }
 
         .menu {
