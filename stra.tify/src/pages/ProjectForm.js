@@ -61,6 +61,7 @@ const ProjectForm = () => {
         console.log(values)
         const data = await createProject(localStorage.getItem("Access_Token"), values, userData.userId)
         .then((response) => {
+            console.log(response);
             if (response.data) navigate(`/episodios/${params.id}`);
             updateProjectInfo(localStorage.getItem("Access_Token"), response.data, response.data.id)
             createProjectInvite(localStorage.getItem("Access_Token"), response.data.id)

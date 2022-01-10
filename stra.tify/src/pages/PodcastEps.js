@@ -37,7 +37,6 @@ const PodcastEps = () => {
         fetchShow(spotifyWebApi, params.id, setShow);
 
         readProjectData(params.id);
-        console.log(show);
     }, []);
     
     
