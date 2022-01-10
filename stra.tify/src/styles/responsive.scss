@@ -1,10 +1,10 @@
-@media only screen and (min-width: 1400px){
+@media only screen and (min-width: 1450px) {
     
     // ---------------- HEADER
     .header nav.container {
         max-width: 100vw !important;
         }
-    }
+    
 
     // -------------- HOME - PODCASTER SECTION 
     
@@ -56,7 +56,7 @@
         .podcast {
 
             .container {
-                // min-width: 1080px;
+                min-width: 1080px;
 
                 img {
                     margin-right: 30px;
@@ -79,6 +79,7 @@
             }
         }
     }
+}
 
     // ---------------- KIT FORM
     
