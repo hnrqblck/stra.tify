@@ -11,7 +11,7 @@ const Podcaster = () => {
             <main className='container'>
                 <p>Dicas de Sucesso</p>
                 <h1>Ei, Podcaster !</h1>
-                <p>O stra.tify irá te guiar para o strateegia, será uma experiência incrível de te aproximar aos ouvintes. Faça seu cadastro com o  e-mail do Podcast.</p>
+                <p>O stra.tify irá te guiar para o strateegia, será uma experiência incrível de te aproximar aos ouvintes.</p>
                 <Link to='/login'>
                     <Button 
                         className='main-button'
