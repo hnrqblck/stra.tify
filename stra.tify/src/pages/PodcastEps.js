@@ -82,7 +82,6 @@ const PodcastEps = () => {
                     <div className='container'>
                         <div className='pod-img'>
                             <img src={ showDb ? readShow.cover : show.cover } alt='Capa podcast'/>
-                            <p>{readShow.createdAt}</p>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>
