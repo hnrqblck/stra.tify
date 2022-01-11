@@ -67,7 +67,7 @@ const ProjectForm = () => {
             createProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
             .then(resp => updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id));
 
-            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id)
+            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id, response.data.created_at)
             createMap(localStorage.getItem("Access_Token"), response.data.id)
             .then(response => {
                 updateProjectData(params.id, response.data.id)
@@ -82,7 +82,7 @@ const ProjectForm = () => {
             }
         });
 
-        function writeProjectData(spotifyId, projectId, title, publisher, cover, description, user) {
+        function writeProjectData(spotifyId, projectId, title, publisher, cover, description, user, createdDate) {
             const db = getDatabase();
             set(ref(db, 'projects/' + spotifyId), {
                 projectId: projectId,
@@ -97,6 +97,7 @@ const ProjectForm = () => {
                     row: 0,
                 },
                 createdBy: user,
+                createdAt: createdDate
             });
         }
 
