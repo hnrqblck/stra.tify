@@ -35,14 +35,16 @@ const ProjectForm = () => {
         cover: '',
         description: ''
     });
-    const [projectData, setProjectData] = React.useState({});
+    // const [projectData, setProjectData] = React.useState({});
     const navigate = useNavigate();
     const {
         handleSubmit,
         register,
         setValue 
     } = useForm();
-
+    const date = new Date;
+    const today = date.toLocaleDateString();
+    
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -67,7 +69,7 @@ const ProjectForm = () => {
             createProjectInvite(localStorage.getItem("Access_Token"), response.data.id)
             .then(resp => updateProjectInvite(localStorage.getItem("Access_Token"), response.data.id));
 
-            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id, response.data.created_at)
+            writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id)
             createMap(localStorage.getItem("Access_Token"), response.data.id)
             .then(response => {
                 updateProjectData(params.id, response.data.id)
@@ -82,7 +84,7 @@ const ProjectForm = () => {
             }
         });
 
-        function writeProjectData(spotifyId, projectId, title, publisher, cover, description, user, createdDate) {
+        function writeProjectData(spotifyId, projectId, title, publisher, cover, description, user) {
             const db = getDatabase();
             set(ref(db, 'projects/' + spotifyId), {
                 projectId: projectId,
@@ -97,7 +99,7 @@ const ProjectForm = () => {
                     row: 0,
                 },
                 createdBy: user,
-                createdAt: createdDate
+                createdAt: today,
             });
         }
 
