@@ -23,6 +23,8 @@ const PodcastEps = () => {
         episodes: [],
         cover: ''
     });
+    const date = new Date;
+    const today = date.toLocaleDateString();
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -33,10 +35,15 @@ const PodcastEps = () => {
             })
         });
 
+        
         spotifyWebApi.setAccessToken(localStorage.getItem("Spotify_Token"));
         fetchShow(spotifyWebApi, params.id, setShow);
-
+        
         readProjectData(params.id);
+
+        // if(spotifyWebApi && showDb && readShow.createdAt !== today) {
+             
+        // }
     }, []);
     
     
@@ -75,6 +82,7 @@ const PodcastEps = () => {
                     <div className='container'>
                         <div className='pod-img'>
                             <img src={ showDb ? readShow.cover : show.cover } alt='Capa podcast'/>
+                            <p>{readShow.createdAt}</p>
                         </div>
                         <div className='podcast-details'>
                             <p>Podcast</p>

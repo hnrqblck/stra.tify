@@ -101,7 +101,7 @@ const PodcastHome = () => {
                 <section className='podcasts-recentes'>
                     <div className='podcasts-recentes--title'>
                         <HeadsetIcon boxSize={30}/>
-                        <h2>Podcasts Recentes</h2>
+                        <h2>Conversas acontecendo agora</h2>
                     </div>
                     <div className='container'>
                         <div>

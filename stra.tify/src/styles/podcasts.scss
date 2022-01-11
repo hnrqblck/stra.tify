@@ -11,12 +11,23 @@
 
     main {
         margin: 80px 0 0 40px;
-        h1 {
-            font-size: 20px;
-            font-weight: 600;
-            line-height: 23.44px;
-            margin-bottom: 40px;
+
+        .podcasts-head {
+            
+            h1 {
+                font-size: 30px;
+                font-weight: 600;
+                line-height: 23.44px;
+                margin-bottom: 8px;
+            }
+
+            p {
+                margin-bottom: 40px;
+                font-size: 16px;
+                color: #908C8C;
+            }
         }
+
 
         .search-bar {
             display: flex;
@@ -36,6 +47,12 @@
                 width: 240px;
             }
 
+        }
+
+        h2{
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;       
         }
 
         .podcasts {

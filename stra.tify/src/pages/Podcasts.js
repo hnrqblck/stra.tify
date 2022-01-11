@@ -76,7 +76,10 @@ const Podcasts = () => {
             <SideNavbar className='sidenav'/>
 
             <main>
-                <h1>Podcasts</h1>
+                <div className='podcasts-head'>
+                    <h1>Podcasts</h1>
+                    <p>Conecte-se com Spotify e crie debates.</p>
+                </div>
                 <div className='search-bar'>
                     <FormProvider>
                         <form onSubmit={handleSubmit(pressEnter)}>
@@ -88,7 +91,7 @@ const Podcasts = () => {
                                 <Input
                                 isReadOnly={spotifyData ? false : true}
                                 {...register("searchContent")}
-                                type='text' placeholder='Busque por título'/>
+                                type='text' placeholder='Busque com Spotify'/>
                             </InputGroup>
                         </form>
                     </FormProvider>
@@ -111,20 +114,22 @@ const Podcasts = () => {
                     }
                     
                 </div>
-                
-                <section className='podcasts'>
-                    {searchResult.length > 0 ? 
-                        searchResult.slice(0, 6).map(ep => (
-                        <Link to={`/episodios/${ep.id}`} key={ep.id}>
-                            <img key={ep.id} src={ep.images[1].url}/>
-                        </Link>
-                    )) : 
-                        Object.entries(shows).slice(0, 10).map(show => (
-                            <Link to={'/episodios/' + show[1].showId} key={show[0]}>
-                                <img src={show[1].cover} alt='Capa podcast' key={show[1].projectId}/>
-                            </Link>    
-                        ))
-                    }
+                <section>
+                    <h2>Conversas acontecendo agora</h2>
+                    <div className='podcasts'>
+                        {searchResult.length > 0 ? 
+                            searchResult.slice(0, 6).map(ep => (
+                            <Link to={`/episodios/${ep.id}`} key={ep.id}>
+                                <img key={ep.id} src={ep.images[1].url}/>
+                            </Link>
+                        )) : 
+                            Object.entries(shows).slice(0, 10).map(show => (
+                                <Link to={'/episodios/' + show[1].showId} key={show[0]}>
+                                    <img src={show[1].cover} alt='Capa podcast' key={show[1].projectId}/>
+                                </Link>    
+                            ))
+                        }
+                    </div>
                 </section>
             </main>
         </div>

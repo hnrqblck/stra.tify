@@ -8,7 +8,7 @@ const Banner = () => {
     return (
         <div id='banner'>
             <h1>Pensamos em um espaço perfeito para você.</h1>
-            <p className='description'>Stra.tify é uma plataforma que une os ouvintes e os Podcaster  num ambiente só.</p>
+            <p className='description'>Stra.tify é uma plataforma que une os ouvintes e os Podcaster em um ambiente só.</p>
             <section className='cards'>
                 <div>
                     <img src={Lightbulb} alt='Lâmpada'/>
