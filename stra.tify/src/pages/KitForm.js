@@ -101,8 +101,8 @@ const KitForm = () => {
                 updateProjectData(showId, col, row)
             });
             toast({
-                title: 'Projeto criado!',
-                description: 'criado com sucesso.',
+                title: 'Discussão criada!',
+                description: 'Episódio foi criado com sucesso.',
                 status: 'success',
                 duration: 5000,
                 isClosable: true.valueOf,

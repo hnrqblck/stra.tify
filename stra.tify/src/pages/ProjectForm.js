@@ -78,7 +78,7 @@ const ProjectForm = () => {
             });
             toast({
                 title: 'Projeto criado!',
-                description: 'criado com sucesso.',
+                description: 'Podcast criado com sucesso.',
                 status: 'success',
                 duration: 5000,
                 isClosable: true.valueOf,
