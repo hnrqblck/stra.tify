@@ -9,7 +9,7 @@ const AboutUs = () => {
             <section className='container'>
                 <div className='about-us'>
                     <h1>Sobre nós</h1>
-                    <p>O stra.tify foi fundado no ano de 2021 em Recife. Desenvolvido por Henrique Balck juntamente com Letícia Siqueira.</p>
+                    <p>O stra.tify foi fundado no ano de 2021 em Recife. Desenvolvido por Henrique Black juntamente com Letícia Siqueira.</p>
                 </div>
                 <div className='contact'>
                         <h1>Contato</h1>

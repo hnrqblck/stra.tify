@@ -10,6 +10,7 @@ import {
     Textarea,
     Select,
     Box,
+    useToast
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
 import { fetchUserData, createKit, createDivPoint } from '../services/requestFunctions';
@@ -36,6 +37,7 @@ const KitForm = () => {
         register,
         setValue, 
     } = useForm();
+    const toast = useToast();
 
     React.useEffect(() => {
         fetchUserData(localStorage.getItem("Access_Token"))
@@ -98,11 +100,17 @@ const KitForm = () => {
                 }
                 updateProjectData(showId, col, row)
             });
-            
+            toast({
+                title: 'Projeto criado!',
+                description: 'criado com sucesso.',
+                status: 'success',
+                duration: 5000,
+                isClosable: true.valueOf,
+            }); 
         })
         .catch((err) => {
             if (err.message === "Request failed with status code 403") {
-                setCreateErrors("Não é possível criar a jornada!");
+                setCreateErrors("Não é possível criar o kit!");
             } else {
                 setCreateErrors(err.message);
             }

@@ -8,7 +8,8 @@ import {
     Radio,
     RadioGroup,
     Textarea,
-    Box
+    Box,
+    useToast
   } from '@chakra-ui/react'
 import SideNavbar from '../components/SideNavbar';
 import { fetchUserData, fetchShow, createProject, updateProjectInfo, createMap, createConnectionLink, createProjectInvite, updateProjectInvite } from '../services/requestFunctions';
@@ -44,6 +45,7 @@ const ProjectForm = () => {
     } = useForm();
     const date = new Date;
     const today = date.toLocaleDateString();
+    const toast = useToast();
     
 
     React.useEffect(() => {
@@ -72,7 +74,14 @@ const ProjectForm = () => {
             writeProjectData(params.id, response.data.id, response.data.title, show.publisher, show.cover, show.description, response.data.users[0].id)
             createMap(localStorage.getItem("Access_Token"), response.data.id)
             .then(response => {
-                updateProjectData(params.id, response.data.id)
+                updateProjectData(params.id, response.data.id);
+            });
+            toast({
+                title: 'Projeto criado!',
+                description: 'criado com sucesso.',
+                status: 'success',
+                duration: 5000,
+                isClosable: true.valueOf,
             });
             
         })
