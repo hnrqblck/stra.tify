@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Spacer, Center } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
-import { ReactComponent as HexagonoColorido } from '../assets/images/hexagono-colorido.svg';
+import { ReactComponent as HexagonoColorido } from '../assets/images/logo-svg.svg';
 import { HomeIcon, AccountIcon, ExitIcon, HexIcon } from './CreateIcon';
 import { SettingsIcon } from '@chakra-ui/icons'
 import '../styles/sidenavbar.scss';
