@@ -42,7 +42,7 @@ const PodcastEps = () => {
         readProjectData(params.id);
 
         // if(spotifyWebApi && showDb && readShow.createdAt !== today) {
-             
+
         // }
     }, []);
     

@@ -115,7 +115,7 @@ const Podcasts = () => {
                     
                 </div>
                 <section>
-                    <h2>Conversas acontecendo agora</h2>
+                    <h2>Conversas acontecendo</h2>
                     <div className='podcasts'>
                         {searchResult.length > 0 ? 
                             searchResult.slice(0, 6).map(ep => (
@@ -123,7 +123,7 @@ const Podcasts = () => {
                                 <img key={ep.id} src={ep.images[1].url}/>
                             </Link>
                         )) : 
-                            Object.entries(shows).slice(0, 10).map(show => (
+                            Object.entries(shows).map(show => (
                                 <Link to={'/episodios/' + show[1].showId} key={show[0]}>
                                     <img src={show[1].cover} alt='Capa podcast' key={show[1].projectId}/>
                                 </Link>    
