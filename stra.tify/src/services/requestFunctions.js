@@ -220,18 +220,18 @@ export const signUp = async (values) => {
     })().catch(e => console.log(e));
 }
 
-export const fetchSavedShows = (spotify, set) => {
-    (async () => {
-        const shows = await spotify.getMySavedShows();
-        const show = shows.items[0].show;
-        set({
-            title: show.name,
-            cover: show.images[0].url,
-            id: show.id
-        })
+// export const fetchSavedShows = (spotify, set) => {
+//     (async () => {
+//         const shows = await spotify.getMySavedShows();
+//         const show = shows.items[0].show;
+//         set({
+//             title: show.name,
+//             cover: show.images[0].url,
+//             id: show.id
+//         })
         
-    })().catch(e => console.log(e));
-}
+//     })().catch(e => console.log(e));
+// }
 
 export const fetchShow = (spotify, showId, set) => {
     (async () => {
